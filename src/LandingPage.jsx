@@ -3,11 +3,11 @@ export const LandingPage = ({ setShowForm }) => {
     useEffect(() => {
         window.YaAuthSuggest.init(
             {
-                client_id: "c46f0c53093440c39f12eff95a9f2f93",
+                client_id: "c4d941e7f402461dac9944a569328c24",
                 response_type: "token",
-                redirect_uri: "https://examplesite.com/suggest/token",
+                redirect_uri: "https://progolymp.cttit.ru/token.html",
             },
-            "https://examplesite.com",
+            "https://progolymp.cttit.ru",
             {
                 view: "button",
                 parentId: "container",
@@ -17,16 +17,21 @@ export const LandingPage = ({ setShowForm }) => {
                 buttonBorderRadius: 5,
             },
         )
-            .then(function (result) {
-                return result.handler();
+            .then((result) => result.handler())
+            .then((data) => {
+                console.log("Recieved Data", data);
+                const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                const payload = { code: data.code };
+                return fetch("/api/authorize", {
+                    method: "POST",
+                    headers: myHeaders,
+                    body: JSON.stringify(payload),
+                });
             })
-            .then(function (data) {
-                console.log("Сообщение с токеном: ", data);
-                document.body.innerHTML += `Сообщение с токеном: ${JSON.stringify(data)}`;
-            })
-            .catch(function (error) {
-                console.log("Что-то пошло не так: ", error);
-                document.body.innerHTML += `Что-то пошло не так: ${JSON.stringify(error)}`;
+            .then((result) => {
+                console.log("Fetch result: ", result);
             });
     });
     return (
