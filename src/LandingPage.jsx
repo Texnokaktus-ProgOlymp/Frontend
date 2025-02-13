@@ -32,6 +32,9 @@ export const LandingPage = ({ setShowForm }) => {
             })
             .then((result) => {
                 console.log("Fetch result: ", result);
+            })
+            .then(() => {
+                setShowForm(true);
             });
     });
     return (
