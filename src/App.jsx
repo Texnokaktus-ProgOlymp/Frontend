@@ -53,25 +53,25 @@ function App() {
                                 <input
                                     className="join-item btn"
                                     type="radio"
-                                    name="8"
+                                    name="grade"
                                     aria-label="8 класс"
                                 />
                                 <input
                                     className="join-item btn"
                                     type="radio"
-                                    name="9"
+                                    name="drade"
                                     aria-label="9 класс"
                                 />
                                 <input
                                     className="join-item btn"
                                     type="radio"
-                                    name="10"
+                                    name="grade"
                                     aria-label="10 класс"
                                 />
                                 <input
                                     className="join-item btn"
                                     type="radio"
-                                    name="11"
+                                    name="grade"
                                     aria-label="11 класс"
                                 />
                             </div>
