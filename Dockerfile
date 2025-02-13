@@ -18,5 +18,3 @@ RUN npm run build
 FROM nginx:latest AS prod
 
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
-
-CMD ["nginx", "-g", "daemon off;"]
