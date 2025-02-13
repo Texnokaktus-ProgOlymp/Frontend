@@ -22,7 +22,7 @@ function App() {
                         Форма регистрации
                     </h2>
 
-                    <div className="collapse collapse-arrow bg-base-100 border border-base-300 w-4/5 shrink-0 shadow-md">
+                    <div className="collapse collapse-arrow bg-base-100 border border-base-300 w-4/5 shrink-0 shadow-md bg-base-200">
                         <input
                             type="radio"
                             name="my-accordion-2"
@@ -50,27 +50,27 @@ function App() {
                             <label className="fieldset-label">
                                 Класс обучения
                             </label>
-                            <div className="join">
+                            <div className="join join-vertical sm:join-horizontal">
                                 <input
-                                    className="join-item btn"
+                                    className="join-item btn btn-soft btn-primary"
                                     type="radio"
                                     name="grade"
                                     aria-label="8 класс"
                                 />
                                 <input
-                                    className="join-item btn"
+                                    className="join-item btn btn-soft btn-primary"
                                     type="radio"
                                     name="grade"
                                     aria-label="9 класс"
                                 />
                                 <input
-                                    className="join-item btn"
+                                    className="join-item btn btn-soft btn-primary"
                                     type="radio"
                                     name="grade"
                                     aria-label="10 класс"
                                 />
                                 <input
-                                    className="join-item btn"
+                                    className="join-item btn btn-soft btn-primary"
                                     type="radio"
                                     name="grade"
                                     aria-label="11 класс"
@@ -87,7 +87,7 @@ function App() {
                             <input type="text" className="input  w-1/2" />
                         </fieldset>
                     </div>
-                    <div className="collapse collapse-arrow bg-base-100 border border-base-300 w-4/5 shrink-0 shadow-md">
+                    <div className="collapse collapse-arrow bg-base-100 border border-base-300 w-4/5 shrink-0 shadow-md bg-base-200">
                         <input type="radio" name="my-accordion-2" />
                         <div className="collapse-title font-semibold">
                             Информация о родителе (законном представителе)
@@ -107,7 +107,7 @@ function App() {
                             <input type="tel" className="input w-1/2" />
                         </fieldset>
                     </div>
-                    <div className="collapse collapse-arrow bg-base-100 border border-base-300 w-4/5 shrink-0 shadow-md">
+                    <div className="collapse collapse-arrow bg-base-100 border border-base-300 w-4/5 shrink-0 shadow-md bg-base-200">
                         <input type="radio" name="my-accordion-2" />
                         <div className="collapse-title font-semibold">
                             Информация о наставнике
