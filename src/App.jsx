@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import InputMask from "react-input-mask";
+import { LandingPage } from "./LandingPage";
 const Input = (props) => (
     <InputMask
         alwaysShowMask={false}
@@ -89,7 +90,7 @@ function App() {
                     <div className="collapse collapse-arrow bg-base-100 border border-base-300 w-4/5 shrink-0 shadow-md">
                         <input type="radio" name="my-accordion-2" />
                         <div className="collapse-title font-semibold">
-                            Инфромация о родителе (законном представителе)
+                            Информация о родителе (законном представителе)
                         </div>
                         <fieldset className="fieldset collapse-content">
                             <label className="fieldset-label">Фамилия</label>
@@ -109,7 +110,7 @@ function App() {
                     <div className="collapse collapse-arrow bg-base-100 border border-base-300 w-4/5 shrink-0 shadow-md">
                         <input type="radio" name="my-accordion-2" />
                         <div className="collapse-title font-semibold">
-                            Инфромация о наставнике
+                            Информация о наставнике
                         </div>
                         <fieldset className="fieldset collapse-content">
                             <label className="fieldset-label">Фамилия</label>
@@ -169,24 +170,7 @@ function App() {
             </div>
         );
     }
-    return (
-        <div className="hero bg-base-200 min-h-screen">
-            <div className="hero-content text-center">
-                <div className="max-w-md">
-                    <h1 className="text-5xl font-bold">Добро пожаловать</h1>
-                    <p className="py-6">
-                        Для прохождение регистрации авторизируйтесь
-                    </p>
-                    <button
-                        className="btn btn-primary"
-                        onClick={() => setShowForm(true)}
-                    >
-                        Клик сюда
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
+    return <LandingPage setShowForm={setShowForm}/>;
 }
 
 export default App;
