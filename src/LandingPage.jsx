@@ -2,12 +2,12 @@ import { useEffect } from "react";
 
 const getTheme = () => {
     if (window.matchMedia) {
-        if (window.matchMedia('prefers-color-scheme: dark').matches) {
-            return "dark"
+        if (window.matchMedia("prefers-color-scheme: dark").matches) {
+            return "dark";
         }
     }
-    return "light"
-}
+    return "light";
+};
 export const LandingPage = ({ setShowForm }) => {
     useEffect(() => {
         window.YaAuthSuggest.init(
@@ -15,7 +15,7 @@ export const LandingPage = ({ setShowForm }) => {
                 client_id: "c4d941e7f402461dac9944a569328c24",
                 response_type: "code",
                 redirect_uri: "https://yid.progolymp.cttit.ru",
-                force_confirm: true
+                force_confirm: true,
             },
             "https://yid.progolymp.cttit.ru",
             {
@@ -53,7 +53,8 @@ export const LandingPage = ({ setShowForm }) => {
                 <div className="max-w-md">
                     <h1 className="text-5xl font-bold">Добро пожаловать</h1>
                     <p className="py-6">
-                        Для прохождения регистрации авторизуйтесь через Яндекс ID
+                        Для прохождения регистрации авторизуйтесь через Яндекс
+                        ID
                     </p>
                     <div id="container" className="max-w-1/3"></div>
                 </div>
