@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import "./App.css";
 import { LandingPage } from "./LandingPage";
-import { Form } from "./Form";
 import { userInfo } from "../store/userInfo";
 import { observer } from "mobx-react-lite";
+import { MainPage } from "./MainPage";
 
 const App = observer(() => {
     useEffect(() => {
@@ -11,7 +11,7 @@ const App = observer(() => {
     });
 
     if (userInfo.isAuthorized()) {
-        return <Form />;
+        return <MainPage />;
     }
     return <LandingPage />;
 });
