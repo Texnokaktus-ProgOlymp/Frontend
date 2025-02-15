@@ -36,7 +36,7 @@ export const LandingPage = observer(() => {
                 myHeaders.append("Content-Type", "application/json");
 
                 const payload = { code: data.code };
-                return fetch("/api/authorize", {
+                return fetch("/api/user/authorize", {
                     method: "POST",
                     headers: myHeaders,
                     body: JSON.stringify(payload),
@@ -45,7 +45,10 @@ export const LandingPage = observer(() => {
             .then((result) => {
                 console.log("Fetch result: ", result);
                 const token = result.json().token;
-                userInfo.setToken(token);
+                console.log("Token: ", token);
+                if (token) {
+                    userInfo.setToken(token);
+                }
             });
     });
     return (
