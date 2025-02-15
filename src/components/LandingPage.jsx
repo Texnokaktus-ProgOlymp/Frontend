@@ -44,7 +44,9 @@ export const LandingPage = observer(() => {
             })
             .then((result) => {
                 console.log("Fetch result: ", result);
-                const token = result.json().token;
+                const res = result.json();
+                console.log("Result: ", res);
+                const token = result.body.token;
                 console.log("Token: ", token);
                 if (token) {
                     userInfo.setToken(token);
