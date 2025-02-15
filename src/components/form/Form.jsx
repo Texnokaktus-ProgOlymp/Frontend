@@ -2,11 +2,13 @@ import InputMask from "react-input-mask";
 import { userInfo } from "../../store/userInfo";
 import { observer } from "mobx-react-lite";
 import { Block } from "./Block";
+import { AcordeonItem } from "./AcordeonItem";
+import { FieldGroup } from "./FieldGroup";
 
 const Input = (props) => (
     <InputMask
         alwaysShowMask={false}
-        className="input w-1/2"
+        className="input w-full"
         placeholder="xxx-xxx-xxx xx"
         mask="999-999-999 99"
         value={props.value}
@@ -47,73 +49,46 @@ export const Form = observer(() => {
                             знает пароль и сможет использовать ее во время
                             очного тура Олимпиады.
                         </span>
-                        <button
-                            className="btn btn-sm btn-primary btn-outline"
-                            onClick={() => userInfo.logout()}
-                        >
-                            Сменить логин
-                        </button>
+                        <div>
+                            <button
+                                className="btn btn-sm btn-primary btn-outline"
+                                onClick={() => userInfo.logout()}
+                            >
+                                Сменить логин
+                            </button>
+                        </div>
                     </div>
                 </Block>
                 <Block>
-                    <div className="collapse collapse-arrow bg-base-100 border border-base-300 shrink-0 shadow-md bg-base-200">
-                        <input
-                            type="radio"
-                            name="my-accordion-2"
-                            defaultChecked
-                        />
-                        <div className="collapse-title font-semibold flex flex-row justify-between">
-                            <div>Информация об участнике</div>
-                            <div className="badge badge-success">
-                                <svg
-                                    className="size-[1em]"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <g
-                                        fill="currentColor"
-                                        strokeLinejoin="miter"
-                                        strokeLinecap="butt"
-                                    >
-                                        <circle
-                                            cx="12"
-                                            cy="12"
-                                            r="10"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeLinecap="square"
-                                            strokeMiterlimit="10"
-                                            strokeWidth="2"
-                                        ></circle>
-                                        <polyline
-                                            points="7 13 10 16 17 8"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeLinecap="square"
-                                            strokeMiterlimit="10"
-                                            strokeWidth="2"
-                                        ></polyline>
-                                    </g>
-                                </svg>
-                                Заполнено
-                            </div>
-                        </div>
-                        <fieldset className="fieldset collapse-content">
-                            <label className="fieldset-label">Фамилия</label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">Имя</label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">
-                                Отчество (при наличии)
-                            </label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">
-                                Дата рождения
-                            </label>
-                            <input type="date" className="input w-1/2" />
-                            <label className="fieldset-label">Снилс</label>
-                            <Input />
-                            <div className="divider"></div>
+                    <AcordeonItem
+                        title="Информация об участнике"
+                        status=""
+                        defaultChecked={true}
+                    >
+                        <FieldGroup>
+                            <fieldset className="fieldset w-full">
+                                <label className="fieldset-label">
+                                    Фамилия
+                                </label>
+                                <input type="text" className="input w-full" />
+                                <label className="fieldset-label">Имя</label>
+                                <input type="text" className="input w-full" />
+                                <label className="fieldset-label">
+                                    Отчество (при наличии)
+                                </label>
+                                <input type="text" className="input w-full" />
+                            </fieldset>
+                            <fieldset className="fieldset w-full">
+                                <label className="fieldset-label">
+                                    Дата рождения
+                                </label>
+                                <input type="date" className="input w-full" />
+                                <label className="fieldset-label">Снилс</label>
+                                <Input />
+                            </fieldset>
+                        </FieldGroup>
+                        <div className="divider"></div>
+                        <fieldset className="fieldset">
                             <label className="fieldset-label">
                                 Класс обучения
                             </label>
@@ -143,6 +118,8 @@ export const Form = observer(() => {
                                     aria-label="11 класс"
                                 />
                             </div>
+                        </fieldset>
+                        <fieldset className="fieldset">
                             <label className="fieldset-label">
                                 Наименование образовательной организации
                             </label>
@@ -153,58 +130,14 @@ export const Form = observer(() => {
                             </label>
                             <input type="text" className="input  w-1/2" />
                         </fieldset>
-                    </div>
+                    </AcordeonItem>
                 </Block>
                 <Block>
-                    <div className="collapse collapse-arrow bg-base-100 border border-base-300 shrink-0 shadow-md bg-base-200">
-                        <input type="radio" name="my-accordion-2" />
-                        <div className="collapse-title font-semibold flex flex-row justify-between">
-                            <div>
-                                Информация о родителе (законном представителе)
-                            </div>
-                            <div className="badge badge-info">
-                                <svg
-                                    className="size-[1em]"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <g
-                                        fill="currentColor"
-                                        strokeLinejoin="miter"
-                                        strokeLinecap="butt"
-                                    >
-                                        <circle
-                                            cx="12"
-                                            cy="12"
-                                            r="10"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeLinecap="square"
-                                            strokeMiterlimit="10"
-                                            strokeWidth="2"
-                                        ></circle>
-                                        <path
-                                            d="m12,17v-5.5c0-.276-.224-.5-.5-.5h-1.5"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            strokeLinecap="square"
-                                            strokeMiterlimit="10"
-                                            strokeWidth="2"
-                                        ></path>
-                                        <circle
-                                            cx="12"
-                                            cy="7.25"
-                                            r="1.25"
-                                            fill="currentColor"
-                                            strokeWidth="2"
-                                        ></circle>
-                                    </g>
-                                </svg>
-                                В процессе
-                            </div>
-                        </div>
-
-                        <fieldset className="fieldset collapse-content">
+                    <AcordeonItem
+                        title="Информация о родителе (законном представителе)"
+                        status=""
+                    >
+                        <fieldset className="fieldset">
                             <label className="fieldset-label">Фамилия</label>
                             <input type="text" className="input w-1/2" />
                             <label className="fieldset-label">Имя</label>
@@ -218,40 +151,11 @@ export const Form = observer(() => {
                             <label className="fieldset-label">Телефон</label>
                             <input type="tel" className="input w-1/2" />
                         </fieldset>
-                    </div>
+                    </AcordeonItem>
                 </Block>
                 <Block>
-                    <div className="collapse collapse-arrow bg-base-100 border border-base-300 shrink-0 shadow-md bg-base-200">
-                        <input type="radio" name="my-accordion-2" />
-                        <div className="collapse-title font-semibold flex flex-row justify-between">
-                            <div>Информация о наставнике</div>
-                            <div className="badge badge-error">
-                                <svg
-                                    className="size-[1em]"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <g fill="currentColor">
-                                        <rect
-                                            x="1.972"
-                                            y="11"
-                                            width="20.056"
-                                            height="2"
-                                            transform="translate(-4.971 12) rotate(-45)"
-                                            fill="currentColor"
-                                            strokeWidth={0}
-                                        ></rect>
-                                        <path
-                                            d="m12,23c-6.065,0-11-4.935-11-11S5.935,1,12,1s11,4.935,11,11-4.935,11-11,11Zm0-20C7.038,3,3,7.037,3,12s4.038,9,9,9,9-4.037,9-9S16.962,3,12,3Z"
-                                            strokeWidth={0}
-                                            fill="currentColor"
-                                        ></path>
-                                    </g>
-                                </svg>
-                                Есть ошибки
-                            </div>
-                        </div>
-                        <fieldset className="fieldset collapse-content">
+                    <AcordeonItem title="Информация о наставнике" status="">
+                        <fieldset className="fieldset">
                             <label className="fieldset-label">Фамилия</label>
                             <input type="text" className="input w-1/2" />
                             <label className="fieldset-label">Имя</label>
@@ -270,7 +174,7 @@ export const Form = observer(() => {
                             <label className="fieldset-label">Телефон</label>
                             <input type="tel" className="input w-1/2" />
                         </fieldset>
-                    </div>
+                    </AcordeonItem>
                 </Block>
                 <Block>
                     <div className="flex row gap-1">
