@@ -48,7 +48,7 @@ export const LandingPage = observer(() => {
             })
             .then((res) => {
                 console.log("Result: ", res);
-                const token = res.body.token;
+                const token = res.token;
                 console.log("Token: ", token);
                 if (token) {
                     userInfo.setToken(token);
