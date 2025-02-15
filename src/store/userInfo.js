@@ -18,7 +18,7 @@ class UserInfo {
     *fetchUserData() {
         try {
             console.log("FETCH USER DATA");
-            const result = yield fetcher().call("GET", "/api/user/current");
+            const result = yield fetcher().call("GET", "https://progolymp.cttit.ru/api/user/current");
             this.login = result.login;
             this.name = result.displayName;
             this.avatarId = result.avatarId;

@@ -10,7 +10,7 @@ export const Header = () => {
             <div className="navbar-end gap-4 hidden md:inline-flex">
                 <Username />
             </div>
-            <div className="navbar-end gap-4 nline-flex md:hidden">
+            <div className="navbar-end gap-4 md:hidden">
                 <div className="dropdown dropdown-bottom dropdown-end">
                     <div
                         tabIndex="0"
