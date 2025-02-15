@@ -7,8 +7,14 @@ import { MainPage } from "./MainPage";
 
 const App = observer(() => {
     useEffect(() => {
-        userInfo.getToken();
+        if (!userInfo.isTokenChecked) {
+            userInfo.getToken();
+        }
     });
+
+    if (!userInfo.isTokenChecked) {
+        return null;
+    }
 
     if (userInfo.isAuthorized()) {
         return <MainPage />;

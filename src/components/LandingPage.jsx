@@ -32,27 +32,8 @@ export const LandingPage = observer(() => {
             .then((result) => result.handler())
             .then((data) => {
                 console.log("Recieved Data", data);
-                const myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
-
-                const payload = { code: data.code };
-                return fetch("/api/user/authorize", {
-                    method: "POST",
-                    headers: myHeaders,
-                    body: JSON.stringify(payload),
-                });
-            })
-            .then((result) => {
-                console.log("Fetch result: ", result);
-                return result.json();
-            })
-            .then((res) => {
-                console.log("Result: ", res);
-                const token = res.token;
-                console.log("Token: ", token);
-                if (token) {
-                    userInfo.setToken(token);
-                }
+                const code = data.code;
+                return userInfo.fetchToken(code);
             });
     });
     return (
