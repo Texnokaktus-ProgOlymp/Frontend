@@ -21,7 +21,10 @@ export const Form = observer(() => {
         <div className="p-4">
             <div className="flex items-center flex-col gap-4">
                 <Block>
-                    <div role="alert" className="alert">
+                    <div
+                        role="alert"
+                        className="alert alert-vertical grid-cols-[auto] sm:alert-horizontal"
+                    >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -35,7 +38,7 @@ export const Form = observer(() => {
                                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                             ></path>
                         </svg>
-                        <span>
+                        <div className="text-start">
                             Вы вошли в систему с помощью учетной записи Яндекса{" "}
                             <span className="badge badge-soft badge-primary">
                                 {userInfo.login} ({userInfo.name})
@@ -48,15 +51,13 @@ export const Form = observer(() => {
                             Проверьте что почта является действующей и участник
                             знает пароль и сможет использовать ее во время
                             очного тура Олимпиады.
-                        </span>
-                        <div>
-                            <button
-                                className="btn btn-sm btn-primary btn-outline"
-                                onClick={() => userInfo.logout()}
-                            >
-                                Сменить логин
-                            </button>
                         </div>
+                        <button
+                            className="btn btn-sm btn-primary btn-outline"
+                            onClick={() => userInfo.logout()}
+                        >
+                            Сменить логин
+                        </button>
                     </div>
                 </Block>
                 <Block>
@@ -88,48 +89,50 @@ export const Form = observer(() => {
                             </fieldset>
                         </FieldGroup>
                         <div className="divider"></div>
-                        <fieldset className="fieldset">
-                            <label className="fieldset-label">
-                                Класс обучения
-                            </label>
-                            <div className="join join-vertical sm:join-horizontal">
-                                <input
-                                    className="join-item btn btn-soft btn-primary"
-                                    type="radio"
-                                    name="grade"
-                                    aria-label="8 класс"
-                                />
-                                <input
-                                    className="join-item btn btn-soft btn-primary"
-                                    type="radio"
-                                    name="grade"
-                                    aria-label="9 класс"
-                                />
-                                <input
-                                    className="join-item btn btn-soft btn-primary"
-                                    type="radio"
-                                    name="grade"
-                                    aria-label="10 класс"
-                                />
-                                <input
-                                    className="join-item btn btn-soft btn-primary"
-                                    type="radio"
-                                    name="grade"
-                                    aria-label="11 класс"
-                                />
-                            </div>
-                        </fieldset>
-                        <fieldset className="fieldset">
-                            <label className="fieldset-label">
-                                Наименование образовательной организации
-                            </label>
-                            <input type="text" className="input  w-1/2" />
-                            <label className="fieldset-label">
-                                Субъект РФ, в котором находится образовательная
-                                организация
-                            </label>
-                            <input type="text" className="input  w-1/2" />
-                        </fieldset>
+                        <FieldGroup>
+                            <fieldset className="fieldset  w-full">
+                                <label className="fieldset-label">
+                                    Класс обучения
+                                </label>
+                                <div className="join join-vertical sm:join-horizontal">
+                                    <input
+                                        className="join-item btn btn-soft btn-primary"
+                                        type="radio"
+                                        name="grade"
+                                        aria-label="8 класс"
+                                    />
+                                    <input
+                                        className="join-item btn btn-soft btn-primary"
+                                        type="radio"
+                                        name="grade"
+                                        aria-label="9 класс"
+                                    />
+                                    <input
+                                        className="join-item btn btn-soft btn-primary"
+                                        type="radio"
+                                        name="grade"
+                                        aria-label="10 класс"
+                                    />
+                                    <input
+                                        className="join-item btn btn-soft btn-primary"
+                                        type="radio"
+                                        name="grade"
+                                        aria-label="11 класс"
+                                    />
+                                </div>
+                            </fieldset>
+                            <fieldset className="fieldset w-full">
+                                <label className="fieldset-label">
+                                    Наименование образовательной организации
+                                </label>
+                                <input type="text" className="input  w-full" />
+                                <label className="fieldset-label">
+                                    Субъект РФ, в котором находится
+                                    образовательная организация
+                                </label>
+                                <input type="text" className="input   w-full" />
+                            </fieldset>
+                        </FieldGroup>
                     </AcordeonItem>
                 </Block>
                 <Block>
@@ -137,43 +140,60 @@ export const Form = observer(() => {
                         title="Информация о родителе (законном представителе)"
                         status=""
                     >
-                        <fieldset className="fieldset">
-                            <label className="fieldset-label">Фамилия</label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">Имя</label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">
-                                Отчество (при наличии)
-                            </label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">Email</label>
-                            <input type="email" className="input w-1/2" />
-                            <label className="fieldset-label">Телефон</label>
-                            <input type="tel" className="input w-1/2" />
-                        </fieldset>
+                        <FieldGroup>
+                            <fieldset className="fieldset  w-full">
+                                <label className="fieldset-label">
+                                    Фамилия
+                                </label>
+                                <input type="text" className="input w-full" />
+                                <label className="fieldset-label">Имя</label>
+                                <input type="text" className="input w-full" />
+                                <label className="fieldset-label">
+                                    Отчество (при наличии)
+                                </label>
+
+                                <input type="text" className="input  w-full" />
+                            </fieldset>
+                            <fieldset className="fieldset  w-full">
+                                <label className="fieldset-label">Email</label>
+                                <input type="email" className="input w-full" />
+                                <label className="fieldset-label">
+                                    Телефон
+                                </label>
+                                <input type="tel" className="input w-full" />
+                            </fieldset>
+                        </FieldGroup>
                     </AcordeonItem>
                 </Block>
                 <Block>
                     <AcordeonItem title="Информация о наставнике" status="">
-                        <fieldset className="fieldset">
-                            <label className="fieldset-label">Фамилия</label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">Имя</label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">
-                                Отчество (при наличии)
-                            </label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">
-                                Наименование образовательной организации,
-                                которую представляет наставник
-                            </label>
-                            <input type="text" className="input w-1/2" />
-                            <label className="fieldset-label">Email</label>
-                            <input type="email" className="input w-1/2" />
-                            <label className="fieldset-label">Телефон</label>
-                            <input type="tel" className="input w-1/2" />
-                        </fieldset>
+                        <FieldGroup>
+                            <fieldset className="fieldset w-full">
+                                <label className="fieldset-label">
+                                    Фамилия
+                                </label>
+                                <input type="text" className="input w-full" />
+                                <label className="fieldset-label">Имя</label>
+                                <input type="text" className="input w-full" />
+                                <label className="fieldset-label">
+                                    Отчество (при наличии)
+                                </label>
+                                <input type="text" className="input w-full" />
+                            </fieldset>
+                            <fieldset className="fieldset w-full">
+                                <label className="fieldset-label">
+                                    Наименование образовательной организации,
+                                    которую представляет наставник
+                                </label>
+                                <input type="text" className="input w-full" />
+                                <label className="fieldset-label">Email</label>
+                                <input type="email" className="input w-full" />
+                                <label className="fieldset-label">
+                                    Телефон
+                                </label>
+                                <input type="tel" className="input w-full" />
+                            </fieldset>
+                        </FieldGroup>
                     </AcordeonItem>
                 </Block>
                 <Block>

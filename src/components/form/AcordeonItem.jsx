@@ -1,7 +1,7 @@
 const Badge = ({ status }) => {
     if (status === "success") {
         return (
-            <div className="badge badge-success">
+            <div className="badge badge-success shrink-0">
                 <svg
                     className="size-[1em]"
                     xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ const Badge = ({ status }) => {
         );
     } else if (status === "error") {
         return (
-            <div className="badge badge-error">
+            <div className="badge badge-error shrink-0">
                 <svg
                     className="size-[1em]"
                     xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +65,7 @@ const Badge = ({ status }) => {
         );
     } else {
         return (
-            <div className="badge badge-info">
+            <div className="badge badge-info shrink-0">
                 <svg
                     className="size-[1em]"
                     xmlns="http://www.w3.org/2000/svg"
