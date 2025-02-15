@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { observer } from "mobx-react-lite";
+import { userInfo } from "../store/userInfo";
 
 const getTheme = () => {
     if (window.matchMedia) {
@@ -8,7 +10,7 @@ const getTheme = () => {
     }
     return "light";
 };
-export const LandingPage = ({ setShowForm }) => {
+export const LandingPage = observer(() => {
     useEffect(() => {
         window.YaAuthSuggest.init(
             {
@@ -42,9 +44,8 @@ export const LandingPage = ({ setShowForm }) => {
             })
             .then((result) => {
                 console.log("Fetch result: ", result);
-            })
-            .then(() => {
-                setShowForm(true);
+                const token = result.json().token;
+                userInfo.setToken(token);
             });
     });
     return (
@@ -61,4 +62,4 @@ export const LandingPage = ({ setShowForm }) => {
             </div>
         </div>
     );
-};
+});
