@@ -14,9 +14,7 @@ export const fetcher = () => {
                 headers: myHeader,
                 body: JSON.stringify(body),
             })
-                .then((response) => {
-                    response.json();
-                })
+                .then((response) => response.json())
                 .then((data) => {
                     console.log("Result ", data);
                     return data;
