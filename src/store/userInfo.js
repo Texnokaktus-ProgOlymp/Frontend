@@ -27,7 +27,7 @@ class UserInfo {
         }
     }
     getAvatarUrl() {
-        return `https://avatars.yandex.net/get-yapic/${this.avatarId}/50`;
+        return `https://avatars.yandex.net/get-yapic/${this.avatarId}/islands-middle`;
     }
     setToken(token) {
         this.token = token;
