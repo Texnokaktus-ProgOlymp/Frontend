@@ -4,6 +4,9 @@ import { observer } from "mobx-react-lite";
 import { Block } from "./Block";
 import { AcordeonItem } from "./AcordeonItem";
 import { FieldGroup } from "./FieldGroup";
+import { formData } from "../../store/form";
+import classNames from "classnames";
+import { useEffect } from "react";
 
 const Input = (props) => (
     <InputMask
@@ -48,9 +51,9 @@ export const Form = observer(() => {
                             "Яндекс.Контест" на дистанционном и на очном этапе
                             Олимпиады.
                             <br></br>
-                            Проверьте, что учетная запись является действующей, участник
-                            знает пароль и сможет использовать ее во время
-                            очного тура Олимпиады.
+                            Проверьте, что учетная запись является действующей,
+                            участник знает пароль и сможет использовать ее во
+                            время очного тура Олимпиады.
                         </div>
                         <button
                             className="btn btn-sm btn-primary btn-outline"
@@ -63,7 +66,11 @@ export const Form = observer(() => {
                 <Block>
                     <AcordeonItem
                         title="Информация об участнике"
-                        status=""
+                        status={
+                            formData.isValidParticipentInfo
+                                ? "success"
+                                : "error"
+                        }
                         defaultChecked={true}
                     >
                         <FieldGroup>
@@ -71,13 +78,42 @@ export const Form = observer(() => {
                                 <label className="fieldset-label">
                                     Фамилия
                                 </label>
-                                <input type="text" className="input w-full" />
+                                <input
+                                    type="text"
+                                    className="input w-full"
+                                    value={
+                                        formData.participentInfo.surname.value
+                                    }
+                                    onChange={(e) => {
+                                        formData.participentInfo.surname.value =
+                                            e.target.value;
+                                    }}
+                                />
                                 <label className="fieldset-label">Имя</label>
-                                <input type="text" className="input w-full" />
+                                <input
+                                    type="text"
+                                    className="input w-full"
+                                    value={formData.participentInfo.name.value}
+                                    onChange={(e) => {
+                                        formData.participentInfo.name.value =
+                                            e.target.value;
+                                    }}
+                                />
                                 <label className="fieldset-label">
                                     Отчество (при наличии)
                                 </label>
-                                <input type="text" className="input w-full" />
+                                <input
+                                    type="text"
+                                    className="input w-full"
+                                    value={
+                                        formData.participentInfo.patronymic
+                                            .value
+                                    }
+                                    onChange={(e) => {
+                                        formData.participentInfo.patronymic.value =
+                                            e.target.value;
+                                    }}
+                                />
                             </fieldset>
                             <fieldset className="fieldset w-full">
                                 <label className="fieldset-label">
@@ -231,7 +267,11 @@ export const Form = observer(() => {
                     </div>
                     <div className="flex row gap-1 justify-end">
                         <button
-                            className="btn btn-primary"
+                            className={classNames([
+                                "btn",
+                                "btn-primary",
+                                !formData.isValid && "btn-disabled",
+                            ])}
                             onClick={() => userInfo.logout()}
                         >
                             Зарегистрироваться

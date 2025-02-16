@@ -1,4 +1,6 @@
-const Badge = ({ status }) => {
+import { observer } from "mobx-react-lite";
+
+const Badge = observer(({ status }) => {
     if (status === "success") {
         return (
             <div className="badge badge-success shrink-0">
@@ -107,21 +109,23 @@ const Badge = ({ status }) => {
             </div>
         );
     }
-};
+});
 
-export const AcordeonItem = ({ title, status, children, defaultChecked }) => {
-    return (
-        <div className="collapse collapse-arrow bg-base-100 border border-base-300 shrink-0 shadow-md bg-base-200">
-            <input
-                type="radio"
-                name="my-accordion-2"
-                defaultChecked={defaultChecked}
-            />
-            <div className="collapse-title font-semibold flex flex-row justify-between">
-                <div>{title}</div>
-                <Badge status={status} />
+export const AcordeonItem = observer(
+    ({ title, status, children, defaultChecked }) => {
+        return (
+            <div className="collapse collapse-arrow bg-base-100 border border-base-300 shrink-0 shadow-md bg-base-200">
+                <input
+                    type="radio"
+                    name="my-accordion-2"
+                    defaultChecked={defaultChecked}
+                />
+                <div className="collapse-title font-semibold flex flex-row justify-between">
+                    <div>{title}</div>
+                    <Badge status={status} />
+                </div>
+                <div className="collapse-content">{children}</div>
             </div>
-            <div className="collapse-content">{children}</div>
-        </div>
-    );
-};
+        );
+    },
+);
