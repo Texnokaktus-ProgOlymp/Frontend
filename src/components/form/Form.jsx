@@ -48,7 +48,7 @@ export const Form = observer(() => {
                             "Яндекс.Контест" на дистанционном и на очном этапе
                             Олимпиады.
                             <br></br>
-                            Проверьте что почта является действующей и участник
+                            Проверьте, что учетная запись является действующей, участник
                             знает пароль и сможет использовать ее во время
                             очного тура Олимпиады.
                         </div>
@@ -200,12 +200,12 @@ export const Form = observer(() => {
                     <div className="flex row gap-1">
                         <input type="checkbox" className="checkbox" />
                         <div className="text-s">
-                            Я подтверждаю что учетная запись Яндекс{" "}
+                            Я подтверждаю, что учетная запись Яндекс{" "}
                             <span className="badge badge-soft badge-primary">
                                 {userInfo.login} ({userInfo.name})
                             </span>{" "}
                             является действующей, участник знает ее логин и
-                            пароль и сможет использовать ее во время Олимпиады.
+                            пароль и сможет использовать ее во время Олимпиады
                         </div>
                     </div>
                 </Block>
@@ -234,7 +234,7 @@ export const Form = observer(() => {
                             className="btn btn-primary"
                             onClick={() => userInfo.logout()}
                         >
-                            Зарегестрироваться
+                            Зарегистрироваться
                         </button>
                     </div>
                 </Block>
