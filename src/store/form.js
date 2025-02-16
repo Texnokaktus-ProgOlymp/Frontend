@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 const notEmpty = (value) => value?.length > 0;
-const isWord = (value) => /^[a-zA-Zа-яА-Я]+$/.test(value);
+const isWord = (value) => /^[а-яА-Я]*$/.test(value);
 const isNumber = (value) => /^[0-9]+$/.test(value);
 const isValid = (field) => {
     console.log("isValid", field);
@@ -24,6 +24,7 @@ class FormData {
                 validate: [notEmpty, isWord],
             },
             patronymic: {
+                value: "",
                 name: "patronymic",
                 validate: [isWord],
             },
