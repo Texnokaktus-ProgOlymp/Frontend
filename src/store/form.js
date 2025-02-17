@@ -1,37 +1,67 @@
 import { makeAutoObservable } from "mobx";
 
-const notEmpty = (value) => value?.length > 0;
-const isWord = (value) => /^[а-яА-Я]*$/.test(value);
-const isNumber = (value) => /^[0-9]+$/.test(value);
-const isValid = (field) => {
-    console.log("isValid", field);
-    return field.validate.every((fn) => fn(field.value));
+const notEmpty = {
+    fn: (value) => value?.length > 0,
+    error: "Поле обязательно для заполнения",
 };
+const isWord = {
+    fn: (value) => /^[а-яА-Я\s-]*$/.test(value),
+    error: "Недопустимый символ, разрешены буквы, дефис, пробел",
+};
+const isNumber = {
+    fn: (value) => /^[0-9]*$/.test(value),
+    error: "Недопустимый символ, разрешены только цифры",
+};
+
+class Field {
+    name;
+    value;
+    validators;
+
+    dirty;
+
+    constructor(value, name, validators) {
+        makeAutoObservable(this);
+        this.name = name;
+        this.value = value;
+        this.validators = validators;
+        this.dirty = false;
+    }
+
+    get isValid() {
+        return this.validators.every((fn) => fn.fn(this.value));
+    }
+    get errorMessage() {
+        return this.validators.find((fn) => !fn.fn(this.value))?.error;
+    }
+    get showError() {
+        return this.dirty && !this.isValid;
+    }
+
+    setValue(value) {
+        console.log("setValue", value);
+        this.dirty = true;
+        this.value = value;
+    }
+}
 class FormData {
     participentInfo;
 
     constructor() {
         makeAutoObservable(this);
         this.participentInfo = {
-            name: {
-                value: "",
-                name: "name",
-                validate: [notEmpty, isWord],
-            },
-            surname: {
-                value: "",
-                name: "surname",
-                validate: [notEmpty, isWord],
-            },
-            patronymic: {
-                value: "",
-                name: "patronymic",
-                validate: [isWord],
-            },
+            name: new Field("", "name", [notEmpty, isWord]),
+            surname: new Field("", "surname", [notEmpty, isWord]),
+            patronymic: new Field("", "patronymic", [isWord]),
+            birthday: new Field("", "birthday", [notEmpty]),
+            grade: new Field("", "grade", [notEmpty]),
+            school: new Field("", "school", [notEmpty]),
         };
     }
     get isValidParticipentInfo() {
-        return Object.values(this.participentInfo).every(isValid);
+        return Object.values(this.participentInfo).every(
+            (field) => field.isValid,
+        );
     }
 
     get isValid() {

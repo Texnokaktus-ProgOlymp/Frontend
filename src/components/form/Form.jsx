@@ -1,4 +1,3 @@
-import InputMask from "react-input-mask";
 import { userInfo } from "../../store/userInfo";
 import { observer } from "mobx-react-lite";
 import { Block } from "./Block";
@@ -7,17 +6,7 @@ import { FieldGroup } from "./FieldGroup";
 import { formData } from "../../store/form";
 import classNames from "classnames";
 import { useEffect } from "react";
-
-const Input = (props) => (
-    <InputMask
-        alwaysShowMask={false}
-        className="input w-full"
-        placeholder="xxx-xxx-xxx xx"
-        mask="999-999-999 99"
-        value={props.value}
-        onChange={props.onChange}
-    />
-);
+import { InputField } from "./InputField";
 
 export const Form = observer(() => {
     return (
@@ -75,58 +64,32 @@ export const Form = observer(() => {
                     >
                         <FieldGroup>
                             <fieldset className="fieldset w-full">
-                                <label className="fieldset-label">
-                                    Фамилия
-                                </label>
-                                <input
-                                    type="text"
-                                    className="input w-full"
-                                    value={
-                                        formData.participentInfo.surname.value
-                                    }
-                                    onChange={(e) => {
-                                        formData.participentInfo.surname.value =
-                                            e.target.value;
-                                    }}
+                                <InputField
+                                    label="Фамилия"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.participentInfo.surname}
                                 />
-                                <label className="fieldset-label">Имя</label>
-                                <input
-                                    type="text"
-                                    className="input w-full"
-                                    value={formData.participentInfo.name.value}
-                                    onChange={(e) => {
-                                        formData.participentInfo.name.value =
-                                            e.target.value;
-                                    }}
+                                <InputField
+                                    label="Имя"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.participentInfo.name}
                                 />
-                                <label className="fieldset-label">
-                                    Отчество (при наличии)
-                                </label>
-                                <input
-                                    type="text"
-                                    className="input w-full"
-                                    value={
-                                        formData.participentInfo.patronymic
-                                            .value
-                                    }
-                                    onChange={(e) => {
-                                        formData.participentInfo.patronymic.value =
-                                            e.target.value;
+                                <InputField
+                                    label="Отчество (при наличии)"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.participentInfo.patronymic}
+                                />
+                                <InputField
+                                    label="Дата рождения"
+                                    inputProps={{
+                                        type: "date",
+                                        min: "2005-01-01",
+                                        max: "2015-12-31",
                                     }}
+                                    field={formData.participentInfo.birthday}
                                 />
                             </fieldset>
                             <fieldset className="fieldset w-full">
-                                <label className="fieldset-label">
-                                    Дата рождения
-                                </label>
-                                <input type="date" className="input w-full" />
-                                <label className="fieldset-label">Снилс</label>
-                                <Input />
-                            </fieldset>
-                        </FieldGroup>
-                        <div className="divider"></div>
-                        <FieldGroup>
-                            <fieldset className="fieldset  w-full">
                                 <label className="fieldset-label">
                                     Класс обучения
                                 </label>
@@ -135,33 +98,80 @@ export const Form = observer(() => {
                                         className="join-item btn btn-soft btn-primary"
                                         type="radio"
                                         name="grade"
+                                        value="8"
                                         aria-label="8 класс"
+                                        checked={
+                                            formData.participentInfo.grade
+                                                .value === "8"
+                                        }
+                                        onChange={() => {
+                                            formData.participentInfo.grade.setValue(
+                                                "8",
+                                            );
+                                        }}
                                     />
                                     <input
                                         className="join-item btn btn-soft btn-primary"
                                         type="radio"
                                         name="grade"
+                                        value="9"
                                         aria-label="9 класс"
+                                        checked={
+                                            formData.participentInfo.grade
+                                                .value === "9"
+                                        }
+                                        onChange={() => {
+                                            formData.participentInfo.grade.setValue(
+                                                "9",
+                                            );
+                                        }}
                                     />
                                     <input
                                         className="join-item btn btn-soft btn-primary"
                                         type="radio"
                                         name="grade"
+                                        value="10"
                                         aria-label="10 класс"
+                                        checked={
+                                            formData.participentInfo.grade
+                                                .value === "10"
+                                        }
+                                        onChange={() => {
+                                            formData.participentInfo.grade.setValue(
+                                                "10",
+                                            );
+                                        }}
                                     />
                                     <input
                                         className="join-item btn btn-soft btn-primary"
                                         type="radio"
                                         name="grade"
+                                        value="11"
                                         aria-label="11 класс"
+                                        checked={
+                                            formData.participentInfo.grade
+                                                .value === "11"
+                                        }
+                                        onChange={() => {
+                                            formData.participentInfo.grade.setValue(
+                                                "11",
+                                            );
+                                        }}
                                     />
                                 </div>
-                            </fieldset>
-                            <fieldset className="fieldset w-full">
-                                <label className="fieldset-label">
-                                    Наименование образовательной организации
-                                </label>
-                                <input type="text" className="input  w-full" />
+                                {formData.participentInfo.grade.showError && (
+                                    <p className="fieldset-label text-error">
+                                        {
+                                            formData.participentInfo.grade
+                                                .errorMessage
+                                        }
+                                    </p>
+                                )}
+                                <InputField
+                                    label="Наименование образовательной организации"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.participentInfo.school}
+                                />
                                 <label className="fieldset-label">
                                     Субъект РФ, в котором находится
                                     образовательная организация
