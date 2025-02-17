@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import { region } from "./region";
 
 const notEmpty = {
     fn: (value) => value?.length > 0,
@@ -56,6 +57,8 @@ class FormData {
             birthday: new Field("", "birthday", [notEmpty]),
             grade: new Field("", "grade", [notEmpty]),
             school: new Field("", "school", [notEmpty]),
+            region: new Field("", "region", [notEmpty]),
+            snils: new Field("", "snils", [notEmpty]),
         };
     }
     get isValidParticipentInfo() {

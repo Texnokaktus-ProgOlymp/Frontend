@@ -7,8 +7,12 @@ import { formData } from "../../store/form";
 import classNames from "classnames";
 import { useEffect } from "react";
 import { InputField } from "./InputField";
+import { region } from "../../store/region";
 
 export const Form = observer(() => {
+    useEffect(() => {
+        region.requestRegionList();
+    }, []);
     return (
         <div className="p-4">
             <div className="flex items-center flex-col gap-4">
@@ -90,6 +94,11 @@ export const Form = observer(() => {
                                 />
                             </fieldset>
                             <fieldset className="fieldset w-full">
+                                <InputField
+                                    label="СНИЛС"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.participentInfo.snils}
+                                />
                                 <label className="fieldset-label">
                                     Класс обучения
                                 </label>
@@ -176,7 +185,38 @@ export const Form = observer(() => {
                                     Субъект РФ, в котором находится
                                     образовательная организация
                                 </label>
-                                <input type="text" className="input   w-full" />
+                                <select
+                                    defaultValue=""
+                                    className="select w-full"
+                                    value={
+                                        formData.participentInfo.region.value
+                                    }
+                                    onChange={(e) => {
+                                        formData.participentInfo.region.setValue(
+                                            e.target.value,
+                                        );
+                                    }}
+                                >
+                                    <option value="" disabled={true}>
+                                        Выберите регион
+                                    </option>
+                                    {region.regionList?.map((region) => (
+                                        <option
+                                            key={region.id}
+                                            value={region.id}
+                                        >
+                                            {region.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                {formData.participentInfo.region.showError && (
+                                    <p className="fieldset-label text-error">
+                                        {
+                                            formData.participentInfo.region
+                                                .errorMessage
+                                        }
+                                    </p>
+                                )}
                             </fieldset>
                         </FieldGroup>
                     </AcordeonItem>
