@@ -1,11 +1,11 @@
 import { Username } from "./Username";
 
-export const Header = () => {
+export const Header = ({title}) => {
     return (
         <div className="navbar bg-base-200 shadow-sm px-6">
             <div className="navbar-start"></div>
             <div className="navbar-center">
-                <div className="text-xl text-bold">Форма регистрации</div>
+                <div className="text-xl text-bold">{title}</div>
             </div>
             <div className="navbar-end gap-4 hidden md:inline-flex">
                 <Username />

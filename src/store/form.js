@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
-import { region } from "./region";
+import { fetcher } from "../utils/fetcher";
+import { userInfo } from "./userInfo";
 
 const notEmpty = {
     fn: (value) => value?.length > 0,
@@ -74,6 +75,7 @@ class FormData {
             school: new Field("", "school", [notEmpty]),
             region: new Field("", "region", [notEmpty]),
             snils: new Field("", "snils", [notEmpty]),
+            email: new Field("", "email", [notEmpty, isEmail]),
         };
         this.parentInfo = {
             name: new Field("", "name", [notEmpty, isWord]),
@@ -112,43 +114,93 @@ class FormData {
         return (
             this.isValidParticipentInfo &&
             this.isValidParentInfo &&
-            this.isValidTeacherInfo && 
+            this.isValidTeacherInfo &&
             this.checkedAgreement &&
             this.checkedLogin
         );
     }
-    /*this.participentInfo = new FormGroup({
-            name: new FormControl("", {
-                validators: [requiredValidator()],
-            }),
-        });*/
-    /*{
-            name: {
-                name: "name",
-                validate: [notEmpty, isWord],
-            },
-            surname: {
-                name: "surname",
-                //validate: [notEmpty, isWord],
-            },
-            patronymic: {
-                name: "patronymic",
-                //validate: [isWord],
-            },
-            birthday: {
-                name: "birthday",
-                //validate: notEmpty,
-            },
-            snils: {
-                name: "snils",
-                //validate: [notEmpty, isNumber],
-            },
-            phone: {
-                name: "phone",
-                //validate: notEmpty,
-            },
-        };
-        */
+
+    *register() {
+        try {
+            const body = {
+                name: {
+                    firstName: this.participentInfo.name.value,
+                    lastName: this.participentInfo.surname.value,
+                    patronym: this.participentInfo.patronymic.value,
+                },
+                birthDate: this.participentInfo.birthday.value, // need reformat,
+                snils: this.participentInfo.snils.value,
+                email: this.parentInfo.email.value,
+                schoolName: this.participentInfo.school.value,
+                regionId: Number(this.participentInfo.region.value),
+                parent: {
+                    name: {
+                        firstName: this.parentInfo.name.value,
+                        lastName: this.parentInfo.surname.value,
+                        patronym: this.parentInfo.patronymic.value,
+                    },
+                    email: this.parentInfo.email.value,
+                    phone: this.parentInfo.phone.value,
+                },
+                teacher: {
+                    school: this.teacherInfo.school.value,
+                    name: {
+                        firstName: this.teacherInfo.name.value,
+                        lastName: this.teacherInfo.surname.value,
+                        patronym: this.teacherInfo.patronymic.value,
+                    },
+                    email: this.teacherInfo.email.value,
+                    phone: this.teacherInfo.phone.value,
+                },
+                personalDataConsent: true,
+                grade: this.participentInfo.grade.value,
+            };
+
+            yield fetcher().call(
+                "POST",
+                "https://progolymp.cttit.ru/api/contests/1/register",
+                body,
+            );
+            console.log("REGISTERED");
+            yield userInfo.checkIfRegistered();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+    /*
+    {
+  "name": {
+    "firstName": "string",
+    "lastName": "string",
+    "patronym": "string"
+  },
+  "birthDate": "2025-02-17",
+  "snils": "string",
+  "email": "string",
+  "schoolName": "string",
+  "regionId": 0,
+  "parent": {
+    "name": {
+      "firstName": "string",
+      "lastName": "string",
+      "patronym": "string"
+    },
+    "email": "string",
+    "phone": "string"
+  },
+  "teacher": {
+    "school": "string",
+    "name": {
+      "firstName": "string",
+      "lastName": "string",
+      "patronym": "string"
+    },
+    "email": "string",
+    "phone": "string"
+  },
+  "personalDataConsent": true,
+  "grade": 0
+}*/
 }
 
 export const formData = new FormData();

@@ -7,9 +7,14 @@ class UserInfo {
     name;
     avatarId;
     token;
+    isRegistered;
+    contestId;
 
     isTokenChecked;
 
+    get contestUrl() {
+        return `https://contest.yandex.ru/contest/${this.contestId}/enter/`;
+    }
     constructor() {
         makeAutoObservable(this);
         this.isTokenChecked = false;
@@ -25,8 +30,21 @@ class UserInfo {
             this.login = result.login;
             this.name = result.displayName;
             this.avatarId = result.avatarId;
+            yield this.checkIfRegistered();
         } catch {
             // ignore
+        }
+    }
+    *checkIfRegistered() {
+        try {
+            const result = yield fetcher().call(
+                "GET",
+                "https://progolymp.cttit.ru/api/contests/1/participation",
+            );
+            this.isRegistered = result.isUserRegistered;
+            this.contestId = result.preliminaryStageParticipation?.contestId;
+        } catch (e) {
+            console.error(e);
         }
     }
     getAvatarUrl() {

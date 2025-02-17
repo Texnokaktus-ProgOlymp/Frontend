@@ -10,7 +10,6 @@ import { InputField } from "./InputField";
 import { region } from "../../store/region";
 
 import InputMask from "react-input-mask";
-import { Input } from "postcss";
 
 export const Form = observer(() => {
     useEffect(() => {
@@ -94,6 +93,11 @@ export const Form = observer(() => {
                                         max: "2015-12-31",
                                     }}
                                     field={formData.participentInfo.birthday}
+                                />
+                                <InputField
+                                    label="Email"
+                                    inputProps={{ type: "email" }}
+                                    field={formData.participentInfo.email}
                                 />
                             </fieldset>
                             <fieldset className="fieldset w-full">
@@ -411,7 +415,7 @@ export const Form = observer(() => {
                                 "btn-primary",
                                 !formData.isValid && "btn-disabled",
                             ])}
-                            onClick={() => userInfo.logout()}
+                            onClick={() => formData.register()}
                         >
                             Зарегистрироваться
                         </button>
