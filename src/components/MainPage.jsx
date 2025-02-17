@@ -4,7 +4,10 @@ import { Header } from "./Header/Header";
 import { userInfo } from "../store/userInfo";
 
 export const MainPage = observer(() => {
-    if (!userInfo.isRegistered) {
+    if (!userInfo.fetchState === "finished") {
+        return null;
+    }
+    if (userInfo.fetchState === "finished" && !userInfo.isRegistered) {
         return (
             <>
                 <Header title="Форма регистрации" />

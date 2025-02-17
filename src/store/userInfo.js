@@ -10,6 +10,8 @@ class UserInfo {
     isRegistered;
     contestId;
 
+    fetchState;
+
     isTokenChecked;
 
     get contestUrl() {
@@ -18,10 +20,12 @@ class UserInfo {
     constructor() {
         makeAutoObservable(this);
         this.isTokenChecked = false;
+        this.fetchState = "inint";
     }
 
     *fetchUserData() {
         try {
+            this.fetchState = "fetching";
             console.log("FETCH USER DATA");
             const result = yield fetcher().call(
                 "GET",
@@ -31,8 +35,9 @@ class UserInfo {
             this.name = result.displayName;
             this.avatarId = result.avatarId;
             yield this.checkIfRegistered();
+            this.fetchState = "finished";
         } catch {
-            // ignore
+            this.fetchState = "finished";
         }
     }
     *checkIfRegistered() {
