@@ -18,7 +18,7 @@ export const MainPage = observer(() => {
         return (
             <>
                 <Header title={"Информация об участнике"} />
-                <div className="w-full flex justify-center items-center h-96">
+                <div className="w-full flex justify-center items-center h-[90vh]">
                     <div className="card bg-primary-content max-w-3xl m-4 min-h-1/3 shadow-sm">
                         <div className="card-body flex gap-4">
                             <h2 className="card-title self-center">
