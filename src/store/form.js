@@ -13,7 +13,17 @@ const isNumber = {
     fn: (value) => /^[0-9]*$/.test(value),
     error: "Недопустимый символ, разрешены только цифры",
 };
-
+const isEmail = {
+    fn: (value) =>
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9a-яА-ЯёЁ]+\.)+[a-zA-Za-яА-ЯёЁ]{2,}))$/.test(
+            value,
+        ),
+    error: "Невалидный email",
+};
+const isPhone = {
+    fn: (value) => /^\+7\s\(\d\d\d\)\s\d\d\d-\d\d-\d\d$/.test(value),
+    error: "Невалидный телефон",
+};
 class Field {
     name;
     value;
@@ -47,6 +57,11 @@ class Field {
 }
 class FormData {
     participentInfo;
+    parentInfo;
+    teacherInfo;
+
+    checkedAgreement;
+    checkedLogin;
 
     constructor() {
         makeAutoObservable(this);
@@ -60,15 +75,47 @@ class FormData {
             region: new Field("", "region", [notEmpty]),
             snils: new Field("", "snils", [notEmpty]),
         };
+        this.parentInfo = {
+            name: new Field("", "name", [notEmpty, isWord]),
+            surname: new Field("", "surname", [notEmpty, isWord]),
+            patronymic: new Field("", "patronymic", [isWord]),
+            phone: new Field("", "phone", [isPhone]),
+            email: new Field("", "email", [notEmpty, isEmail]),
+        };
+        this.teacherInfo = {
+            name: new Field("", "name", [notEmpty, isWord]),
+            surname: new Field("", "surname", [notEmpty, isWord]),
+            patronymic: new Field("", "patronymic", [isWord]),
+            phone: new Field("", "phone", [isPhone]),
+            email: new Field("", "email", [notEmpty, isEmail]),
+            school: new Field("", "school", [notEmpty]),
+        };
+        this.checkedAgreement = false;
+        this.checkedLogin = false;
     }
+
     get isValidParticipentInfo() {
         return Object.values(this.participentInfo).every(
             (field) => field.isValid,
         );
     }
 
+    get isValidParentInfo() {
+        return Object.values(this.parentInfo).every((field) => field.isValid);
+    }
+
+    get isValidTeacherInfo() {
+        return Object.values(this.teacherInfo).every((field) => field.isValid);
+    }
+
     get isValid() {
-        return this.isValidParticipentInfo;
+        return (
+            this.isValidParticipentInfo &&
+            this.isValidParentInfo &&
+            this.isValidTeacherInfo && 
+            this.checkedAgreement &&
+            this.checkedLogin
+        );
     }
     /*this.participentInfo = new FormGroup({
             name: new FormControl("", {

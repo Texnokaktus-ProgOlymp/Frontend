@@ -9,6 +9,9 @@ import { useEffect } from "react";
 import { InputField } from "./InputField";
 import { region } from "../../store/region";
 
+import InputMask from "react-input-mask";
+import { Input } from "postcss";
+
 export const Form = observer(() => {
     useEffect(() => {
         region.requestRegionList();
@@ -224,67 +227,145 @@ export const Form = observer(() => {
                 <Block>
                     <AcordeonItem
                         title="Информация о родителе (законном представителе)"
-                        status=""
+                        status={
+                            formData.isValidParentInfo ? "success" : "error"
+                        }
                     >
                         <FieldGroup>
                             <fieldset className="fieldset  w-full">
-                                <label className="fieldset-label">
-                                    Фамилия
-                                </label>
-                                <input type="text" className="input w-full" />
-                                <label className="fieldset-label">Имя</label>
-                                <input type="text" className="input w-full" />
-                                <label className="fieldset-label">
-                                    Отчество (при наличии)
-                                </label>
-
-                                <input type="text" className="input  w-full" />
+                                <InputField
+                                    label="Фамилия"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.parentInfo.surname}
+                                />
+                                <InputField
+                                    label="Имя"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.parentInfo.name}
+                                />
+                                <InputField
+                                    label="Отчество (при наличии)"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.parentInfo.patronymic}
+                                />
                             </fieldset>
                             <fieldset className="fieldset  w-full">
-                                <label className="fieldset-label">Email</label>
-                                <input type="email" className="input w-full" />
+                                <InputField
+                                    label="Email"
+                                    inputProps={{ type: "email" }}
+                                    field={formData.parentInfo.email}
+                                />
                                 <label className="fieldset-label">
                                     Телефон
                                 </label>
-                                <input type="tel" className="input w-full" />
+                                <InputMask
+                                    mask="+7 (999) 999-99-99"
+                                    className={classNames([
+                                        "input",
+                                        "w-full",
+                                        formData.parentInfo.phone.showError &&
+                                            "input-error",
+                                    ])}
+                                    value={formData.parentInfo.phone.value}
+                                    onChange={(e) => {
+                                        formData.parentInfo.phone.setValue(
+                                            e.target.value,
+                                        );
+                                    }}
+                                >
+                                    {(inputProps) => (
+                                        <input {...inputProps} type="tel" />
+                                    )}
+                                </InputMask>
+                                {formData.parentInfo.phone.showError && (
+                                    <p className="fieldset-label text-error">
+                                        {formData.parentInfo.phone.errorMessage}
+                                    </p>
+                                )}
                             </fieldset>
                         </FieldGroup>
                     </AcordeonItem>
                 </Block>
                 <Block>
-                    <AcordeonItem title="Информация о наставнике" status="">
+                    <AcordeonItem
+                        title="Информация о наставнике"
+                        status={
+                            formData.isValidTeacherInfo ? "success" : "error"
+                        }
+                    >
                         <FieldGroup>
                             <fieldset className="fieldset w-full">
-                                <label className="fieldset-label">
-                                    Фамилия
-                                </label>
-                                <input type="text" className="input w-full" />
-                                <label className="fieldset-label">Имя</label>
-                                <input type="text" className="input w-full" />
-                                <label className="fieldset-label">
-                                    Отчество (при наличии)
-                                </label>
-                                <input type="text" className="input w-full" />
+                                <InputField
+                                    label="Фамилия"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.teacherInfo.surname}
+                                />
+                                <InputField
+                                    label="Имя"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.teacherInfo.name}
+                                />
+                                <InputField
+                                    label="Отчество (при наличии)"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.teacherInfo.patronymic}
+                                />
                             </fieldset>
                             <fieldset className="fieldset w-full">
-                                <label className="fieldset-label">
-                                    Наименование образовательной организации,
-                                    которую представляет наставник
-                                </label>
-                                <input type="text" className="input w-full" />
-                                <label className="fieldset-label">Email</label>
-                                <input type="email" className="input w-full" />
+                                <InputField
+                                    label="Наименование образовательной организации, которую представляет наставник"
+                                    inputProps={{ type: "text" }}
+                                    field={formData.teacherInfo.school}
+                                />
+                                <InputField
+                                    label="Email"
+                                    inputProps={{ type: "email" }}
+                                    field={formData.teacherInfo.email}
+                                />
                                 <label className="fieldset-label">
                                     Телефон
                                 </label>
-                                <input type="tel" className="input w-full" />
+                                <InputMask
+                                    mask="+7 (999) 999-99-99"
+                                    className={classNames([
+                                        "input",
+                                        "w-full",
+                                        formData.teacherInfo.phone.showError &&
+                                            "input-error",
+                                    ])}
+                                    value={formData.teacherInfo.phone.value}
+                                    onChange={(e) => {
+                                        formData.teacherInfo.phone.setValue(
+                                            e.target.value,
+                                        );
+                                    }}
+                                >
+                                    {(inputProps) => (
+                                        <input {...inputProps} type="tel" />
+                                    )}
+                                </InputMask>
+                                {formData.teacherInfo.phone.showError && (
+                                    <p className="fieldset-label text-error">
+                                        {
+                                            formData.teacherInfo.phone
+                                                .errorMessage
+                                        }
+                                    </p>
+                                )}
                             </fieldset>
                         </FieldGroup>
                     </AcordeonItem>
                 </Block>
                 <Block>
                     <div className="flex row gap-1">
-                        <input type="checkbox" className="checkbox" />
+                        <input
+                            type="checkbox"
+                            className="checkbox"
+                            checked={formData.checkedLogin}
+                            onChange={(e) => {
+                                formData.checkedLogin = e.target.checked;
+                            }}
+                        />
                         <div className="text-s">
                             Я подтверждаю, что учетная запись Яндекс{" "}
                             <span className="badge badge-soft badge-primary">
@@ -297,7 +378,15 @@ export const Form = observer(() => {
                 </Block>
                 <Block>
                     <div className="flex row gap-1">
-                        <input type="checkbox" className="checkbox" />
+                        <input
+                            type="checkbox"
+                            className="checkbox"
+                            onChange={(e) => {
+                                formData.checkedAgreement =
+                                    e.target.checked;
+                            }}
+                            checked={formData.checkedAgreement}
+                        />
                         <div className="text-xs">
                             Я, родитель (законный представитель) участника,
                             заполняя настоящую форму регистрации, в соответствии
