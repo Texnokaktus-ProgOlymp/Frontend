@@ -1,6 +1,7 @@
 import { Username } from "./Username";
+import { userInfo } from "../../store/userInfo";
 
-export const Header = ({title}) => {
+export const Header = ({ title }) => {
     return (
         <div className="navbar bg-base-200 shadow-sm px-6">
             <div className="navbar-start"></div>
@@ -8,7 +9,19 @@ export const Header = ({title}) => {
                 <div className="text-xl text-bold">{title}</div>
             </div>
             <div className="navbar-end gap-4 hidden md:inline-flex">
-                <Username />
+                <div className="dropdown dropdown-bottom dropdown-end">
+                    <div tabIndex="0" role="button">
+                        <Username />
+                    </div>
+                    <button
+                        className="dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                        onClick={() => {
+                            userInfo.logout();
+                        }}
+                    >
+                        Сменить аккаунт
+                    </button>
+                </div>
             </div>
             <div className="navbar-end gap-4 md:hidden">
                 <div className="dropdown dropdown-bottom dropdown-end">
@@ -33,12 +46,23 @@ export const Header = ({title}) => {
                             />{" "}
                         </svg>
                     </div>
-                    <div
+                    <ul
                         tabIndex="0"
-                        className="dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                        className="menu dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
                     >
-                        <Username />
-                    </div>
+                        <li className="menu-title">
+                            <Username />
+                        </li>
+                        <li>
+                            <button
+                                onClick={() => {
+                                    userInfo.logout();
+                                }}
+                            >
+                                Сменить аккаунт
+                            </button>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
