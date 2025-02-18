@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { fetcher } from "../utils/fetcher";
+import { fetcher, fetcherWithoutResponse } from "../utils/fetcher";
 import { participentInfo } from "./participentInfo";
 
 const notEmpty = {
@@ -182,7 +182,7 @@ class FormData {
                 grade: this.participentInfo.grade.value,
             };
 
-            yield fetcher().call(
+            yield fetcherWithoutResponse().call(
                 "POST",
                 "https://progolymp.cttit.ru/api/contests/1/register",
                 body,

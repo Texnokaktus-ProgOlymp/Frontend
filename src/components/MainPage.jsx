@@ -3,32 +3,20 @@ import { Form } from "./form/Form";
 import { Header } from "./Header/Header";
 import { userInfo } from "../store/userInfo";
 import { participentInfo } from "../store/participentInfo";
-import { useEffect } from "react";
 
 export const MainPage = observer(() => {
-    useEffect(() => {
-        console.log(
-            "useEffect",
-            userInfo.fetchState,
-            participentInfo.fetchState,
-            participentInfo.isRegistered,
-        );
-    });
-    if (
-        !userInfo.fetchState === "finished" ||
-        !participentInfo.fetchState === "finished"
-    ) {
+    let isLoaded =
+        userInfo.fetchState === "finished" &&
+        participentInfo.fetchState === "finished";
+
+    if (!isLoaded) {
         console.log(
             "fetchState",
             userInfo.fetchState,
             participentInfo.fetchState,
         );
         return null;
-    }
-    if (
-        participentInfo.fetchState === "finished" &&
-        !participentInfo.isRegistered
-    ) {
+    } else if (!participentInfo.isRegistered) {
         console.log("not registered");
         return (
             <>
