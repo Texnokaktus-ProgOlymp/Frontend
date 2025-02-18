@@ -64,10 +64,10 @@ export const Form = observer(() => {
                         status={
                             formData.isValidParticipentInfo
                                 ? "success"
-                                : formData.isInProgressParticipentInfo
-                                  ? "progress"
-                                  : formData.hasParticipentInfoShowError
-                                    ? "error"
+                                : formData.hasParticipentInfoShowError
+                                  ? "error"
+                                  : formData.isInProgressParticipentInfo
+                                    ? "progress"
                                     : "default"
                         }
                         defaultChecked={true}
@@ -238,10 +238,10 @@ export const Form = observer(() => {
                         status={
                             formData.isValidParentInfo
                                 ? "success"
-                                : formData.isInProgressParentInfo
-                                  ? "progress"
-                                  : formData.hasParentInfoShowError
-                                    ? "error"
+                                : formData.hasParentInfoShowError
+                                  ? "error"
+                                  : formData.isInProgressParentInfo
+                                    ? "progress"
                                     : "default"
                         }
                     >
@@ -306,10 +306,10 @@ export const Form = observer(() => {
                         status={
                             formData.isValidTeacherInfo
                                 ? "success"
-                                : formData.isInProgressTeacherInfo
-                                  ? "progress"
-                                  : formData.hasTeacherInfoShowError
-                                    ? "error"
+                                : formData.hasTeacherInfoShowError
+                                  ? "error"
+                                  : formData.isInProgressTeacherInfo
+                                    ? "progress"
                                     : "default"
                         }
                     >

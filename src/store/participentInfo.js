@@ -4,6 +4,8 @@ import { makeAutoObservable } from "mobx";
 class ParticipentInfo {
     isRegistered;
 
+    contestId;
+
     fetchState = "initial";
     constructor() {
         makeAutoObservable(this);
@@ -22,6 +24,10 @@ class ParticipentInfo {
             this.fetchState = "finished";
             console.error(e);
         }
+    }
+
+    get contestUrl() {
+        return `https://contest.yandex.ru/contest/${this.contestId}/enter/`;
     }
 }
 export const participentInfo = new ParticipentInfo();

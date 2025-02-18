@@ -8,15 +8,11 @@ class UserInfo {
     name;
     avatarId;
     token;
-    contestId;
 
     fetchState;
 
     isTokenChecked;
 
-    get contestUrl() {
-        return `https://contest.yandex.ru/contest/${this.contestId}/enter/`;
-    }
     constructor() {
         makeAutoObservable(this);
         this.isTokenChecked = false;
