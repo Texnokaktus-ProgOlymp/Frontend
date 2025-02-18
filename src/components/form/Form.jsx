@@ -64,7 +64,11 @@ export const Form = observer(() => {
                         status={
                             formData.isValidParticipentInfo
                                 ? "success"
-                                : "error"
+                                : formData.isInProgressParticipentInfo
+                                  ? "progress"
+                                  : formData.hasParticipentInfoShowError
+                                    ? "error"
+                                    : "default"
                         }
                         defaultChecked={true}
                     >
@@ -232,7 +236,13 @@ export const Form = observer(() => {
                     <AcordeonItem
                         title="Информация о родителе (законном представителе)"
                         status={
-                            formData.isValidParentInfo ? "success" : "error"
+                            formData.isValidParentInfo
+                                ? "success"
+                                : formData.isInProgressParentInfo
+                                  ? "progress"
+                                  : formData.hasParentInfoShowError
+                                    ? "error"
+                                    : "default"
                         }
                     >
                         <FieldGroup>
@@ -294,7 +304,13 @@ export const Form = observer(() => {
                     <AcordeonItem
                         title="Информация о наставнике"
                         status={
-                            formData.isValidTeacherInfo ? "success" : "error"
+                            formData.isValidTeacherInfo
+                                ? "success"
+                                : formData.isInProgressTeacherInfo
+                                  ? "progress"
+                                  : formData.hasTeacherInfoShowError
+                                    ? "error"
+                                    : "default"
                         }
                     >
                         <FieldGroup>
@@ -386,8 +402,7 @@ export const Form = observer(() => {
                             type="checkbox"
                             className="checkbox"
                             onChange={(e) => {
-                                formData.checkedAgreement =
-                                    e.target.checked;
+                                formData.checkedAgreement = e.target.checked;
                             }}
                             checked={formData.checkedAgreement}
                         />

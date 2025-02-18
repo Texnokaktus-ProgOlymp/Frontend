@@ -95,10 +95,20 @@ class FormData {
         this.checkedAgreement = false;
         this.checkedLogin = false;
     }
-
     get isValidParticipentInfo() {
         return Object.values(this.participentInfo).every(
             (field) => field.isValid,
+        );
+    }
+
+    get isInProgressParticipentInfo() {
+        return Object.values(this.participentInfo).some((field) => field.dirty);
+    }
+
+    get hasParticipentInfoShowError() {
+        console.log("hasShowError");
+        return Object.values(this.participentInfo).some(
+            (field) => field.showError,
         );
     }
 
@@ -106,8 +116,22 @@ class FormData {
         return Object.values(this.parentInfo).every((field) => field.isValid);
     }
 
+    get isInProgressParentInfo() {
+        return Object.values(this.parentInfo).some((field) => field.dirty);
+    }
+
+    get hasParentInfoShowError() {
+        return Object.values(this.parentInfo).some((field) => field.showError);
+    }
+
     get isValidTeacherInfo() {
         return Object.values(this.teacherInfo).every((field) => field.isValid);
+    }
+    get isInProgressTeacherInfo() {
+        return Object.values(this.teacherInfo).some((field) => field.dirty);
+    }
+    get hasTeacherInfoShowError() {
+        return Object.values(this.teacherInfo).some((field) => field.showError);
     }
 
     get isValid() {
@@ -167,40 +191,6 @@ class FormData {
             console.error(e);
         }
     }
-    /*
-    {
-  "name": {
-    "firstName": "string",
-    "lastName": "string",
-    "patronym": "string"
-  },
-  "birthDate": "2025-02-17",
-  "snils": "string",
-  "email": "string",
-  "schoolName": "string",
-  "regionId": 0,
-  "parent": {
-    "name": {
-      "firstName": "string",
-      "lastName": "string",
-      "patronym": "string"
-    },
-    "email": "string",
-    "phone": "string"
-  },
-  "teacher": {
-    "school": "string",
-    "name": {
-      "firstName": "string",
-      "lastName": "string",
-      "patronym": "string"
-    },
-    "email": "string",
-    "phone": "string"
-  },
-  "personalDataConsent": true,
-  "grade": 0
-}*/
 }
 
 export const formData = new FormData();

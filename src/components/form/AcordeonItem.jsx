@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 
 const Badge = observer(({ status }) => {
+    if (status === "default") return null;
     if (status === "success") {
         return (
             <div className="badge badge-success shrink-0">
