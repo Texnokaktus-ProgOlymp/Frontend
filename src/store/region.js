@@ -7,12 +7,16 @@ class Region {
         makeAutoObservable(this);
     }
     *requestRegionList() {
+        if (this.regionList) {
+            return this.regionList;
+        }
         try {
             const result = yield fetcher().call(
                 "GET",
                 "https://progolymp.cttit.ru/api/regions",
             );
             this.regionList = result;
+            return result;
         } catch (e) {
             console.error(e);
         }

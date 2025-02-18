@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { fetcher } from "../utils/fetcher";
+import { participentInfo } from "./participentInfo";
 const storageKey = "technoKaktusToken";
 
 class UserInfo {
@@ -7,7 +8,6 @@ class UserInfo {
     name;
     avatarId;
     token;
-    isRegistered;
     contestId;
 
     fetchState;
@@ -34,24 +34,13 @@ class UserInfo {
             this.login = result.login;
             this.name = result.displayName;
             this.avatarId = result.avatarId;
-            yield this.checkIfRegistered();
+            yield participentInfo.checkIfRegistered();
             this.fetchState = "finished";
         } catch {
             this.fetchState = "finished";
         }
     }
-    *checkIfRegistered() {
-        try {
-            const result = yield fetcher().call(
-                "GET",
-                "https://progolymp.cttit.ru/api/contests/1/participation",
-            );
-            this.isRegistered = result.isUserRegistered;
-            this.contestId = result.preliminaryStageParticipation?.contestId;
-        } catch (e) {
-            console.error(e);
-        }
-    }
+
     getAvatarUrl() {
         return `https://avatars.yandex.net/get-yapic/${this.avatarId}/islands-middle`;
     }

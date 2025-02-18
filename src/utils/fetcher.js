@@ -26,3 +26,24 @@ export const fetcher = () => {
         },
     };
 };
+
+export const fetcherWithoutResponse = () => {
+    let myHeader = new Headers();
+    myHeader.append("Content-Type", "application/json");
+    if (userInfo.token) {
+        myHeader.append("Authorization", "Bearer " + userInfo.token);
+    }
+    return {
+        call: (method, url, body) => {
+            console.log("API call: ", method, url);
+            return fetch(url, {
+                method,
+                headers: myHeader,
+                body: JSON.stringify(body),
+            }).catch((error) => {
+                console.error("Error ", error);
+                throw error;
+            });
+        },
+    };
+};

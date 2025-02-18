@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { fetcher } from "../utils/fetcher";
-import { userInfo } from "./userInfo";
+import { participentInfo } from "./participentInfo";
 
 const notEmpty = {
     fn: (value) => value?.length > 0,
@@ -150,7 +150,8 @@ class FormData {
                 name: {
                     firstName: this.participentInfo.name.value,
                     lastName: this.participentInfo.surname.value,
-                    patronym: this.participentInfo.patronymic.value,
+                    patronym:
+                        this.participentInfo.patronymic.value || null,
                 },
                 birthDate: this.participentInfo.birthday.value, // need reformat,
                 snils: this.participentInfo.snils.value,
@@ -161,7 +162,7 @@ class FormData {
                     name: {
                         firstName: this.parentInfo.name.value,
                         lastName: this.parentInfo.surname.value,
-                        patronym: this.parentInfo.patronymic.value,
+                        patronym: this.parentInfo.patronymic.value || null,
                     },
                     email: this.parentInfo.email.value,
                     phone: this.parentInfo.phone.value,
@@ -171,7 +172,8 @@ class FormData {
                     name: {
                         firstName: this.teacherInfo.name.value,
                         lastName: this.teacherInfo.surname.value,
-                        patronym: this.teacherInfo.patronymic.value,
+                        patronym:
+                            this.teacherInfo.patronymic.value || null,
                     },
                     email: this.teacherInfo.email.value,
                     phone: this.teacherInfo.phone.value,
@@ -186,7 +188,7 @@ class FormData {
                 body,
             );
             console.log("REGISTERED");
-            yield userInfo.checkIfRegistered();
+            yield participentInfo.checkIfRegistered();
         } catch (e) {
             console.error(e);
         }

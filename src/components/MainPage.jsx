@@ -2,12 +2,34 @@ import { observer } from "mobx-react-lite";
 import { Form } from "./form/Form";
 import { Header } from "./Header/Header";
 import { userInfo } from "../store/userInfo";
+import { participentInfo } from "../store/participentInfo";
+import { useEffect } from "react";
 
 export const MainPage = observer(() => {
-    if (!userInfo.fetchState === "finished") {
+    useEffect(() => {
+        console.log(
+            "useEffect",
+            userInfo.fetchState,
+            participentInfo.fetchState,
+            participentInfo.isRegistered,
+        );
+    });
+    if (
+        !userInfo.fetchState === "finished" ||
+        !participentInfo.fetchState === "finished"
+    ) {
+        console.log(
+            "fetchState",
+            userInfo.fetchState,
+            participentInfo.fetchState,
+        );
         return null;
     }
-    if (userInfo.fetchState === "finished" && !userInfo.isRegistered) {
+    if (
+        participentInfo.fetchState === "finished" &&
+        !participentInfo.isRegistered
+    ) {
+        console.log("not registered");
         return (
             <>
                 <Header title="Форма регистрации" />
@@ -15,6 +37,7 @@ export const MainPage = observer(() => {
             </>
         );
     } else {
+        console.log("registered");
         return (
             <>
                 <Header title={"Информация об участнике"} />
