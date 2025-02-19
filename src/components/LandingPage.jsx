@@ -31,7 +31,6 @@ export const LandingPage = observer(() => {
         )
             .then((result) => result.handler())
             .then((data) => {
-                console.log("Recieved Data", data);
                 const code = data.code;
                 return userInfo.fetchToken(code);
             });

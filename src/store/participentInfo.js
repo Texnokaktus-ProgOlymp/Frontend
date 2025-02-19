@@ -1,5 +1,6 @@
 import { fetcher } from "../utils/fetcher";
 import { makeAutoObservable } from "mobx";
+import { errorStore } from "./error";
 
 class ParticipentInfo {
     isRegistered;
@@ -21,8 +22,8 @@ class ParticipentInfo {
             this.contestId = result.preliminaryStageParticipation?.contestId;
             this.fetchState = "finished";
         } catch (e) {
+            errorStore.showError("Не удалось провверить регистрацию");
             this.fetchState = "finished";
-            console.error(e);
         }
     }
 

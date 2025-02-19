@@ -22,7 +22,6 @@ class UserInfo {
     *fetchUserData() {
         try {
             this.fetchState = "fetching";
-            console.log("FETCH USER DATA");
             const result = yield fetcher().call(
                 "GET",
                 "https://progolymp.cttit.ru/api/user/current",
@@ -30,6 +29,12 @@ class UserInfo {
             this.login = result.login;
             this.name = result.displayName;
             this.avatarId = result.avatarId;
+        } catch {
+            this.logout();
+            this.fetchState = "finished";
+            return;
+        }
+        try {
             yield participentInfo.checkIfRegistered();
             this.fetchState = "finished";
         } catch {
@@ -59,7 +64,6 @@ class UserInfo {
         window.localStorage.removeItem(storageKey);
     }
     isAuthorized() {
-        console.log("IS AUTHORIZED", this.token);
         return Boolean(this.token);
     }
 
@@ -70,9 +74,7 @@ class UserInfo {
             "/api/user/authorize",
             payload,
         );
-        console.log("Result: ", result);
         const token = result.token;
-        console.log("Token: ", token);
         if (token) {
             this.setToken(token);
             yield this.fetchUserData();

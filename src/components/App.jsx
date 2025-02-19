@@ -4,6 +4,7 @@ import { LandingPage } from "./LandingPage";
 import { userInfo } from "../store/userInfo";
 import { observer } from "mobx-react-lite";
 import { MainPage } from "./MainPage";
+import { Error } from "./Error";
 
 const App = observer(() => {
     useEffect(() => {
@@ -15,11 +16,12 @@ const App = observer(() => {
     if (!userInfo.isTokenChecked) {
         return null;
     }
-
-    if (userInfo.isAuthorized()) {
-        return <MainPage />;
-    }
-    return <LandingPage />;
+    return (
+        <div className="relative">
+            {userInfo.isAuthorized() ? <MainPage /> : <LandingPage />}
+            <Error />
+        </div>
+    );
 });
 
 export default App;

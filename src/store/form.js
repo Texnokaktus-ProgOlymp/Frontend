@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { fetcher, fetcherWithoutResponse } from "../utils/fetcher";
 import { participentInfo } from "./participentInfo";
+import { errorStore } from "./error";
 
 const notEmpty = {
     fn: (value) => value?.length > 0,
@@ -51,7 +52,6 @@ class Field {
     }
 
     setValue(value) {
-        console.log("setValue", value);
         this.dirty = true;
         this.value = value;
     }
@@ -106,7 +106,6 @@ class FormData {
     }
 
     get hasParticipentInfoShowError() {
-        console.log("hasShowError");
         return Object.values(this.participentInfo).some(
             (field) => field.showError,
         );
@@ -150,8 +149,7 @@ class FormData {
                 name: {
                     firstName: this.participentInfo.name.value,
                     lastName: this.participentInfo.surname.value,
-                    patronym:
-                        this.participentInfo.patronymic.value || null,
+                    patronym: this.participentInfo.patronymic.value || null,
                 },
                 birthDate: this.participentInfo.birthday.value, // need reformat,
                 snils: this.participentInfo.snils.value,
@@ -172,8 +170,7 @@ class FormData {
                     name: {
                         firstName: this.teacherInfo.name.value,
                         lastName: this.teacherInfo.surname.value,
-                        patronym:
-                            this.teacherInfo.patronymic.value || null,
+                        patronym: this.teacherInfo.patronymic.value || null,
                     },
                     email: this.teacherInfo.email.value,
                     phone: this.teacherInfo.phone.value,
@@ -182,14 +179,26 @@ class FormData {
                 grade: this.participentInfo.grade.value,
             };
 
-            yield fetcherWithoutResponse().call(
+            const result = yield fetcherWithoutResponse().call(
                 "POST",
                 "https://progolymp.cttit.ru/api/contests/1/register",
                 body,
             );
-            console.log("REGISTERED");
-            yield participentInfo.checkIfRegistered();
+            if (result.status === 201) {
+                yield participentInfo.checkIfRegistered();
+            } else {
+                if (result.status === 400) {
+                    errorStore.showError("Ошибка валидации");
+                } else if (result.status === 409) {
+                    errorStore.showError("Регистрация закрыта");
+                } else {
+                    throw new Error();
+                }
+            }
         } catch (e) {
+            errorStore.showError(
+                "Не удалось зарегестироваться. Сервер недоступен",
+            );
             console.error(e);
         }
     }

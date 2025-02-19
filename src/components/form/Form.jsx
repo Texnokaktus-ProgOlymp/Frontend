@@ -423,6 +423,8 @@ export const Form = observer(() => {
                             </a>
                         </div>
                     </div>
+                </Block>
+                <Block>
                     <div className="flex row gap-1 justify-end">
                         <button
                             className={classNames([

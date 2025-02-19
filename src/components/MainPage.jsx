@@ -10,14 +10,8 @@ export const MainPage = observer(() => {
         participentInfo.fetchState === "finished";
 
     if (!isLoaded) {
-        console.log(
-            "fetchState",
-            userInfo.fetchState,
-            participentInfo.fetchState,
-        );
         return null;
     } else if (!participentInfo.isRegistered) {
-        console.log("not registered");
         return (
             <>
                 <Header title="Форма регистрации" />
@@ -25,7 +19,6 @@ export const MainPage = observer(() => {
             </>
         );
     } else {
-        console.log("registered");
         return (
             <>
                 <Header title={"Информация об участнике"} />
