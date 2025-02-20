@@ -61,7 +61,7 @@ jobs:
           context: .
           build-args: |
             VERSION=${{ steps.get-version.outputs.version }}
-          file: Dockerfile
+          file: Dockerfile-dev
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
