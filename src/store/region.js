@@ -13,7 +13,7 @@ class Region {
         try {
             const result = yield fetcher().call(
                 "GET",
-                "https://progolymp.cttit.ru/api/regions",
+                "/api/regions",
             );
             this.regionList = result;
             return result;
