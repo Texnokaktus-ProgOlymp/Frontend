@@ -181,7 +181,7 @@ class FormData {
 
             const result = yield fetcherWithoutResponse().call(
                 "POST",
-                "https://progolymp.cttit.ru/api/contests/1/register",
+                "/api/contests/1/register",
                 body,
             );
             if (result.status === 201) {

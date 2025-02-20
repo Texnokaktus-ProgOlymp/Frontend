@@ -16,7 +16,7 @@ class ParticipentInfo {
             this.fetchState = "fetching";
             const result = yield fetcher().call(
                 "GET",
-                "https://progolymp.cttit.ru/api/contests/1/participation",
+                "/api/contests/1/participation",
             );
             this.isRegistered = result.isUserRegistered;
             this.contestId = result.preliminaryStageParticipation?.contestId;

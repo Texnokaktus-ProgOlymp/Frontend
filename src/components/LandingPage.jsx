@@ -38,11 +38,16 @@ export const LandingPage = observer(() => {
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content text-center">
-                <div className="max-w-md">
-                    <h1 className="text-5xl font-bold">Добро пожаловать</h1>
+                <div className="w-full max-w-lg">
+                    <h1 className="text-3xl font-bold">
+                        Олимпиада по информатике и программированию 2025
+                    </h1>
                     <p className="py-6">
-                        Для прохождения регистрации авторизуйтесь через Яндекс
-                        ID
+                        Для прохождения регистрации авторизуйтесь через Яндекс ID
+                    </p>
+                    <p className="py-6">
+                        Выбранная на данном этапе учетная запись Яндекс ID будет использована для решения задач
+                        отборочного и очного тура
                     </p>
                     <div id="container" className="max-w-1/3"></div>
                 </div>

@@ -24,7 +24,7 @@ class UserInfo {
             this.fetchState = "fetching";
             const result = yield fetcher().call(
                 "GET",
-                "https://progolymp.cttit.ru/api/user/current",
+                "/api/user/current",
             );
             this.login = result.login;
             this.name = result.displayName;
