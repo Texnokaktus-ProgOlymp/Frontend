@@ -8,7 +8,7 @@ const notEmpty = {
     error: "Поле обязательно для заполнения",
 };
 const isWord = {
-    fn: (value) => /^[а-яА-Я\s-]*$/.test(value),
+    fn: (value) => /^[а-яА-ЯёЁ\s-]*$/.test(value),
     error: "Недопустимый символ, разрешены буквы, дефис, пробел",
 };
 const isNumber = {
