@@ -153,7 +153,7 @@ class FormData {
                 },
                 birthDate: this.participentInfo.birthday.value, // need reformat,
                 snils: this.participentInfo.snils.value,
-                email: this.parentInfo.email.value,
+                email: this.participentInfo.email.value,
                 schoolName: this.participentInfo.school.value,
                 regionId: Number(this.participentInfo.region.value),
                 parent: {
