@@ -8,7 +8,7 @@ const notEmpty = {
     error: "Поле обязательно для заполнения",
 };
 const isWord = {
-    fn: (value) => /^[а-яА-Я\s-]*$/.test(value),
+    fn: (value) => /^[а-яА-ЯёЁ\s-]*$/.test(value),
     error: "Недопустимый символ, разрешены буквы, дефис, пробел",
 };
 const isNumber = {
@@ -153,7 +153,7 @@ class FormData {
                 },
                 birthDate: this.participentInfo.birthday.value, // need reformat,
                 snils: this.participentInfo.snils.value,
-                email: this.parentInfo.email.value,
+                email: this.participentInfo.email.value,
                 schoolName: this.participentInfo.school.value,
                 regionId: Number(this.participentInfo.region.value),
                 parent: {
