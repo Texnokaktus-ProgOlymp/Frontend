@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { fetcher, fetcherWithoutResponse } from "../utils/fetcher";
-import { participentInfo } from "./participentInfo";
+import { participantInfo } from "./participantInfo.js";
 import { errorStore } from "./error";
 
 const notEmpty = {
@@ -57,7 +57,7 @@ class Field {
     }
 }
 class FormData {
-    participentInfo;
+    participantInfo;
     parentInfo;
     teacherInfo;
 
@@ -66,7 +66,7 @@ class FormData {
 
     constructor() {
         makeAutoObservable(this);
-        this.participentInfo = {
+        this.participantInfo = {
             name: new Field("", "name", [notEmpty, isWord]),
             surname: new Field("", "surname", [notEmpty, isWord]),
             patronymic: new Field("", "patronymic", [isWord]),
@@ -95,18 +95,18 @@ class FormData {
         this.checkedAgreement = false;
         this.checkedLogin = false;
     }
-    get isValidParticipentInfo() {
-        return Object.values(this.participentInfo).every(
+    get isValidParticipantInfo() {
+        return Object.values(this.participantInfo).every(
             (field) => field.isValid,
         );
     }
 
-    get isInProgressParticipentInfo() {
-        return Object.values(this.participentInfo).some((field) => field.dirty);
+    get isInProgressParticipantInfo() {
+        return Object.values(this.participantInfo).some((field) => field.dirty);
     }
 
-    get hasParticipentInfoShowError() {
-        return Object.values(this.participentInfo).some(
+    get hasParticipantInfoShowError() {
+        return Object.values(this.participantInfo).some(
             (field) => field.showError,
         );
     }
@@ -135,7 +135,7 @@ class FormData {
 
     get isValid() {
         return (
-            this.isValidParticipentInfo &&
+            this.isValidParticipantInfo &&
             this.isValidParentInfo &&
             this.isValidTeacherInfo &&
             this.checkedAgreement &&
@@ -147,15 +147,15 @@ class FormData {
         try {
             const body = {
                 name: {
-                    firstName: this.participentInfo.name.value,
-                    lastName: this.participentInfo.surname.value,
-                    patronym: this.participentInfo.patronymic.value || null,
+                    firstName: this.participantInfo.name.value,
+                    lastName: this.participantInfo.surname.value,
+                    patronym: this.participantInfo.patronymic.value || null,
                 },
-                birthDate: this.participentInfo.birthday.value, // need reformat,
-                snils: this.participentInfo.snils.value,
-                email: this.participentInfo.email.value,
-                schoolName: this.participentInfo.school.value,
-                regionId: Number(this.participentInfo.region.value),
+                birthDate: this.participantInfo.birthday.value, // need reformat,
+                snils: this.participantInfo.snils.value,
+                email: this.participantInfo.email.value,
+                schoolName: this.participantInfo.school.value,
+                regionId: Number(this.participantInfo.region.value),
                 parent: {
                     name: {
                         firstName: this.parentInfo.name.value,
@@ -176,7 +176,7 @@ class FormData {
                     phone: this.teacherInfo.phone.value,
                 },
                 personalDataConsent: true,
-                grade: this.participentInfo.grade.value,
+                grade: this.participantInfo.grade.value,
             };
 
             const result = yield fetcherWithoutResponse().call(
@@ -185,7 +185,7 @@ class FormData {
                 body,
             );
             if (result.status === 201) {
-                yield participentInfo.checkIfRegistered();
+                yield participantInfo.checkIfRegistered();
             } else {
                 if (result.status === 400) {
                     errorStore.showError("Ошибка валидации");
@@ -197,7 +197,7 @@ class FormData {
             }
         } catch (e) {
             errorStore.showError(
-                "Не удалось зарегестироваться. Сервер недоступен",
+                "Не удалось зарегистрироваться. Сервер недоступен",
             );
             console.error(e);
         }

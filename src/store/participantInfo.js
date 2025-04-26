@@ -2,7 +2,7 @@ import { fetcher } from "../utils/fetcher";
 import { makeAutoObservable } from "mobx";
 import { errorStore } from "./error";
 
-class ParticipentInfo {
+class ParticipantInfo {
     isRegistered;
 
     contestId;
@@ -22,7 +22,7 @@ class ParticipentInfo {
             this.contestId = result.preliminaryStageParticipation?.contestId;
             this.fetchState = "finished";
         } catch (e) {
-            errorStore.showError("Не удалось провверить регистрацию");
+            errorStore.showError("Не удалось проверить регистрацию");
             this.fetchState = "finished";
         }
     }
@@ -31,4 +31,4 @@ class ParticipentInfo {
         return `https://contest.yandex.ru/contest/${this.contestId}/enter/`;
     }
 }
-export const participentInfo = new ParticipentInfo();
+export const participantInfo = new ParticipantInfo();
