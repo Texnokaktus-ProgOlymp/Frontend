@@ -105,7 +105,7 @@ class FormData {
         return Object.values(this.participantInfo).some((field) => field.dirty);
     }
 
-    get hasparticipantInfoShowError() {
+    get hasParticipantInfoShowError() {
         return Object.values(this.participantInfo).some(
             (field) => field.showError,
         );
