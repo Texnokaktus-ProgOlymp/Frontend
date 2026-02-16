@@ -16,7 +16,7 @@ class ParticipantInfo {
             this.fetchState = "fetching";
             const result = yield fetcher().call(
                 "GET",
-                "/api/contests/olymp26/participation",
+                "/api/contests/2/participation",
             );
             this.isRegistered = result.isUserRegistered;
             this.contestId = result.preliminaryStageParticipation?.contestId;
