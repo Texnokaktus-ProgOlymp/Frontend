@@ -101,11 +101,11 @@ class FormData {
         );
     }
 
-    get isInProgressParticipentInfo() {
+    get isInProgressParticipantInfo() {
         return Object.values(this.participantInfo).some((field) => field.dirty);
     }
 
-    get hasParticipentInfoShowError() {
+    get hasparticipantInfoShowError() {
         return Object.values(this.participantInfo).some(
             (field) => field.showError,
         );

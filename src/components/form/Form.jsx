@@ -64,9 +64,9 @@ export const Form = observer(() => {
                         status={
                             formData.isValidParticipantInfo
                                 ? "success"
-                                : formData.hasParticipentInfoShowError
+                                : formData.hasParticipantInfoShowError
                                   ? "error"
-                                  : formData.isInProgressParticipentInfo
+                                  : formData.isInProgressParticipantInfo
                                     ? "progress"
                                     : "default"
                         }
