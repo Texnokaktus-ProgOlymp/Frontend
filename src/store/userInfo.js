@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { fetcher } from "../utils/fetcher";
-import { participentInfo } from "./participentInfo";
+import { participantInfo } from "./participantInfo";
 const storageKey = "technoKaktusToken";
 
 class UserInfo {
@@ -35,7 +35,7 @@ class UserInfo {
             return;
         }
         try {
-            yield participentInfo.checkIfRegistered();
+            yield participantInfo.checkIfRegistered();
             this.fetchState = "finished";
         } catch {
             this.fetchState = "finished";
