@@ -2,16 +2,16 @@ import { observer } from "mobx-react-lite";
 import { Form } from "./form/Form";
 import { Header } from "./Header/Header";
 import { userInfo } from "../store/userInfo";
-import { participantInfo } from "../store/participantInfo";
+import { participentInfo } from "../store/participentInfo";
 
 export const MainPage = observer(() => {
     let isLoaded =
         userInfo.fetchState === "finished" &&
-        participantInfo.fetchState === "finished";
+        participentInfo.fetchState === "finished";
 
     if (!isLoaded) {
         return null;
-    } else if (!participantInfo.isRegistered) {
+    } else if (!participentInfo.isRegistered) {
         return (
             <>
                 <Header title="Форма регистрации" />
@@ -55,8 +55,8 @@ export const MainPage = observer(() => {
                                             className="btn btn-primary shrink min-w-[200px]"
                                             target="_blank"
                                             href={
-                                                participantInfo.contestId
-                                                    ? participantInfo.contestUrl
+                                                participentInfo.contestId
+                                                    ? participentInfo.contestUrl
                                                     : ""
                                             }
                                         >

@@ -62,11 +62,11 @@ export const Form = observer(() => {
                     <AcordeonItem
                         title="Информация об участнике"
                         status={
-                            formData.isValidParticipantInfo
+                            formData.isValidParticipentInfo
                                 ? "success"
-                                : formData.hasParticipantInfoShowError
+                                : formData.hasParticipentInfoShowError
                                   ? "error"
-                                  : formData.isInProgressParticipantInfo
+                                  : formData.isInProgressParticipentInfo
                                     ? "progress"
                                     : "default"
                         }
@@ -77,17 +77,17 @@ export const Form = observer(() => {
                                 <InputField
                                     label="Фамилия"
                                     inputProps={{ type: "text" }}
-                                    field={formData.participantInfo.surname}
+                                    field={formData.participentInfo.surname}
                                 />
                                 <InputField
                                     label="Имя"
                                     inputProps={{ type: "text" }}
-                                    field={formData.participantInfo.name}
+                                    field={formData.participentInfo.name}
                                 />
                                 <InputField
                                     label="Отчество (при наличии)"
                                     inputProps={{ type: "text" }}
-                                    field={formData.participantInfo.patronymic}
+                                    field={formData.participentInfo.patronymic}
                                 />
                                 <InputField
                                     label="Дата рождения"
@@ -96,19 +96,19 @@ export const Form = observer(() => {
                                         min: "2005-01-01",
                                         max: "2015-12-31",
                                     }}
-                                    field={formData.participantInfo.birthday}
+                                    field={formData.participentInfo.birthday}
                                 />
                                 <InputField
                                     label="Email"
                                     inputProps={{ type: "email" }}
-                                    field={formData.participantInfo.email}
+                                    field={formData.participentInfo.email}
                                 />
                             </fieldset>
                             <fieldset className="fieldset w-full">
                                 <InputField
                                     label="СНИЛС"
                                     inputProps={{ type: "text" }}
-                                    field={formData.participantInfo.snils}
+                                    field={formData.participentInfo.snils}
                                 />
                                 <label className="fieldset-label">
                                     Класс обучения
@@ -121,11 +121,11 @@ export const Form = observer(() => {
                                         value="8"
                                         aria-label="8 класс"
                                         checked={
-                                            formData.participantInfo.grade
+                                            formData.participentInfo.grade
                                                 .value === "8"
                                         }
                                         onChange={() => {
-                                            formData.participantInfo.grade.setValue(
+                                            formData.participentInfo.grade.setValue(
                                                 "8",
                                             );
                                         }}
@@ -137,11 +137,11 @@ export const Form = observer(() => {
                                         value="9"
                                         aria-label="9 класс"
                                         checked={
-                                            formData.participantInfo.grade
+                                            formData.participentInfo.grade
                                                 .value === "9"
                                         }
                                         onChange={() => {
-                                            formData.participantInfo.grade.setValue(
+                                            formData.participentInfo.grade.setValue(
                                                 "9",
                                             );
                                         }}
@@ -153,11 +153,11 @@ export const Form = observer(() => {
                                         value="10"
                                         aria-label="10 класс"
                                         checked={
-                                            formData.participantInfo.grade
+                                            formData.participentInfo.grade
                                                 .value === "10"
                                         }
                                         onChange={() => {
-                                            formData.participantInfo.grade.setValue(
+                                            formData.participentInfo.grade.setValue(
                                                 "10",
                                             );
                                         }}
@@ -169,20 +169,20 @@ export const Form = observer(() => {
                                         value="11"
                                         aria-label="11 класс"
                                         checked={
-                                            formData.participantInfo.grade
+                                            formData.participentInfo.grade
                                                 .value === "11"
                                         }
                                         onChange={() => {
-                                            formData.participantInfo.grade.setValue(
+                                            formData.participentInfo.grade.setValue(
                                                 "11",
                                             );
                                         }}
                                     />
                                 </div>
-                                {formData.participantInfo.grade.showError && (
+                                {formData.participentInfo.grade.showError && (
                                     <p className="fieldset-label text-error">
                                         {
-                                            formData.participantInfo.grade
+                                            formData.participentInfo.grade
                                                 .errorMessage
                                         }
                                     </p>
@@ -190,7 +190,7 @@ export const Form = observer(() => {
                                 <InputField
                                     label="Наименование образовательной организации"
                                     inputProps={{ type: "text" }}
-                                    field={formData.participantInfo.school}
+                                    field={formData.participentInfo.school}
                                 />
                                 <label className="fieldset-label">
                                     Субъект РФ, в котором находится
@@ -200,10 +200,10 @@ export const Form = observer(() => {
                                     defaultValue=""
                                     className="select w-full"
                                     value={
-                                        formData.participantInfo.region.value
+                                        formData.participentInfo.region.value
                                     }
                                     onChange={(e) => {
-                                        formData.participantInfo.region.setValue(
+                                        formData.participentInfo.region.setValue(
                                             e.target.value,
                                         );
                                     }}
@@ -220,10 +220,10 @@ export const Form = observer(() => {
                                         </option>
                                     ))}
                                 </select>
-                                {formData.participantInfo.region.showError && (
+                                {formData.participentInfo.region.showError && (
                                     <p className="fieldset-label text-error">
                                         {
-                                            formData.participantInfo.region
+                                            formData.participentInfo.region
                                                 .errorMessage
                                         }
                                     </p>
