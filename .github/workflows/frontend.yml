@@ -67,9 +67,12 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Push tag
-        uses: actions-ecosystem/action-push-tag@v1
-        with:
-          tag: v${{ steps.get-version.outputs.version }}
+        run: |
+          tag=v${{ steps.get-version.outputs.version }}
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git tag -a "${tag}"
+          git push origin "${tag}"
 
   deploy:
 
