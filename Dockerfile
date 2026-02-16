@@ -8,6 +8,6 @@ COPY . ./
 
 RUN npm run build
 
-FROM nginx:latest AS prod
+FROM nginx:alpine AS prod
 
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html

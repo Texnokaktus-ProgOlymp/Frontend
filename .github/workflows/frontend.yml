@@ -66,6 +66,11 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: Push tag
+        uses: actions-ecosystem/action-push-tag@v1
+        with:
+          tag: v${{ steps.get-version.outputs.version }}
+
   deploy:
 
     needs: docker
