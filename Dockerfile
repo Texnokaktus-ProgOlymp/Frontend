@@ -2,7 +2,7 @@ FROM node:20.18 AS builder
 
 WORKDIR /usr/src/app
 ENV PATH=/usr/src/node_modules/.bin:$PATH
-COPY package.json ./
+COPY package.json package-lock.json ./
 RUN npm install
 COPY . ./
 
